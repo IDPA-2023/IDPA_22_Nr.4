@@ -1,38 +1,21 @@
-# create-svelte
+<h1 align="center">Abstimmungs Tool</h1>
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Dieses Projekt ist ein Abstimmungstool, das als IDPA von Oliver, Yannick und Leandro entwickelt wurde. Es nutzt SvelteKit als Frontend-Framework und Pocketbase als Datenbank.
 
-## Creating a project
+## Verwendung
+Das Abstimmungstool ermöglicht es Benutzern, Abstimmungen zu erstellen und an Abstimmungen teilzunehmen. Benutzer können Abstimmungen erstellen, indem sie eine Frage und mögliche Antwortoptionen angeben. Andere Benutzer können dann an der Abstimmung teilnehmen, indem sie für eine der Optionen stimmen.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Der Benutzer kann eine Abstimmung erstellen, die öffentlich oder privat ist. Wenn eine Abstimmung privat ist, können nur Benutzer, die der Host der Abstimmung hinzugefügt hat, an der Abstimmung teilnehmen, mittels eines Links, den der Host der Abstimmung teilt oder per Login. Wenn eine Abstimmung öffentlich ist, können alle Benutzer an der Abstimmung teilnehmen, ohne sich anzumelden.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Technologie
+Das Abstimmungstool wurde mit folgenden Technologien entwickelt:
 
-## Developing
++ SvelteKit: Ein Framework für die Entwicklung von Webanwendungen.
++ Pocketbase: Eine cloudbasierte Datenbank.
++ Tailwind CSS: Ein Utility-First CSS-Framework.
++ DaisyUI: Ein Utility-First CSS-Framework für Tailwind CSS.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Autoren
+Dieses Projekt wurde von @oliver-oswald, @Yannickqb und @LeandroCarvalho200409 entwickelt.
