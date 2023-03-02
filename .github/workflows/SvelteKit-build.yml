@@ -20,3 +20,5 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
+        env: 
+          DB_URL: ${{secrets.DB_URL}}
