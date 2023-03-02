@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@tailwindcss/typography": "^0.5.9",
 		"daisyui": "^2.51.0",
 		"pocketbase": "^0.12.0"
 	}
