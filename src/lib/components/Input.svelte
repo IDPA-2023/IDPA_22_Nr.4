@@ -7,6 +7,7 @@
 		type?: string;
 		disabled?: boolean;
 		required?: boolean;
+		errors?: string[];
 	}
 	export let value = '';
 	export let placeholder = '';
@@ -15,6 +16,7 @@
 	export let type: string = 'text';
 	export let disabled: boolean = false;
 	export let required: boolean = false;
+	export let errors: string[] | undefined = [];
 </script>
 
 <div class="form-control w-full max-w-lg mb-2">
@@ -32,4 +34,13 @@
 		name={id}
 		{value}
 	/>
+	{#if errors}
+		{#each errors as error}
+			<label for={id} class="label py-0 pt-1">
+				<span class="label-text-alt text-error">
+					{error}
+				</span>
+			</label>
+		{/each}
+	{/if}
 </div>
