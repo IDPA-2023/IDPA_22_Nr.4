@@ -23,7 +23,7 @@
 				<Input id="password" type="password" label="Passwort" />
 				<Input id="passwordConfirm" type="password" label="Passwort bestätigen" />
 				<div class="w-full max-w-lg pt-2">
-					<button type="submit" class="btn btn-primary w-full">Registrieren</button>
+					<button type="submit" class="btn btn-primary w-full">Register</button>
 				</div>
 			</form>
 		</div>
