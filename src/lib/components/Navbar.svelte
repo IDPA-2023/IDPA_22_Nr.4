@@ -6,7 +6,7 @@
 
 <div class="navbar bg-base-100 w-auto rounded-md shadow-2xl">
   <div class="flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <a href="/" class="btn btn-ghost normal-case text-xl">PollToll</a>
   </div>
   <div class="flex-none gap-2">
     <div class="form-control">
