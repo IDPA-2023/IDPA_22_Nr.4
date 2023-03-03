@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Input } from '$lib/components';
+	import type { ActionData } from './$types';
+	export let form: ActionData;
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
@@ -18,10 +20,21 @@
 				method="POST"
 				class="flex flex-col items-center space-y-2 w-full pt-4"
 			>
-				<Input id="name" label="Name" />
-				<Input id="email" type="email" label="Email" />
-				<Input id="password" type="password" label="Passwort" />
-				<Input id="passwordConfirm" type="password" label="Passwort bestätigen" />
+				<Input id="name" value={form?.data?.name} label="Name" errors={form?.errors.name} />
+				<Input
+					type="email"
+					id="email"
+					value={form?.data?.email}
+					label="Email"
+					errors={form?.errors.email}
+				/>
+				<Input type="password" id="password" label="Password" errors={form?.errors.password} />
+				<Input
+					type="password"
+					id="passwordConfirm"
+					label="Confirm Password"
+					errors={form?.errors.passwordConfirm}
+				/>
 				<div class="w-full max-w-lg pt-2">
 					<button type="submit" class="btn btn-primary w-full">Register</button>
 				</div>
