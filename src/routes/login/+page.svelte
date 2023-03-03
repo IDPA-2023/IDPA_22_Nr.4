@@ -63,7 +63,7 @@
 					disabled={loading}
 				/>
 				<div class="w-full max-w-md pt-2">
-					<button type="submit" class="btn btn-primary w-full">Login</button>
+					<button type="submit" class="btn btn-primary w-full" disabled={loading}>Login</button>
 				</div>
 			</form>
 		</div>
