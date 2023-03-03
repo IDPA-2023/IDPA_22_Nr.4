@@ -23,7 +23,7 @@
       <!-- svelte-ignore a11y-label-has-associated-control -->
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img alt="avatar" src="https://api.lorem.space/image/face?w=80&h=80" />
+          <img alt="avatar" src={`https://ui-avatars.com/api/?name=${user?.name}`} />
         </div>
       </label>
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
