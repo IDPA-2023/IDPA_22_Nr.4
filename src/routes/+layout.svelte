@@ -9,5 +9,7 @@
 
 <div class="h-full from-primary to-secondary bg-gradient-to-br p-4">
     <Navbar {user}/>
-    <slot />
+    <div class="py-4">
+        <slot />
+    </div>
 </div>
