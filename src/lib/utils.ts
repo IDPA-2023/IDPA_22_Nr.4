@@ -13,7 +13,7 @@ export const generateUsername = (name: string) => {
 
 export const validateData = async <T extends z.ZodTypeAny>(
 	formData: FormData,
-	schema: T,
+	schema: T
 ): Promise<{ formData: z.infer<T>; errors: z.inferFlattenedErrors<typeof schema> | null }> => {
 	const body = Object.fromEntries(formData);
 

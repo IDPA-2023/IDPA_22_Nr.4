@@ -1,11 +1,10 @@
-
 name: Unit tests with vitest
 
 on:
   push:
-    branches: [master,beta]
+    branches: [master, beta]
   pull_request:
-    branches: [master,beta]
+    branches: [master, beta]
 
 jobs:
   build:

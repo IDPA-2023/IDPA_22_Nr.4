@@ -47,13 +47,13 @@ describe('login schema tests', () => {
 	});
 });
 
-describe('register schema tests', () => { 
+describe('register schema tests', () => {
 	let form: FormData;
 	beforeEach(() => {
-        form = new FormData();
+		form = new FormData();
 	});
-	
-	it('test required name', async () => { 
+
+	it('test required name', async () => {
 		const { errors } = await validateData(form, registerUserSchema);
 		expect(errors?.fieldErrors?.name).toStrictEqual(['Name ist erforderlich']);
 	});
@@ -64,41 +64,41 @@ describe('register schema tests', () => {
 		expect(errors?.fieldErrors?.name).toStrictEqual([
 			'Der Name darf nur Buchstaben und Leerzeichen enthalten'
 		]);
-	})
+	});
 
 	it('test short name', async () => {
 		form.append('name', 'M');
 		const { errors } = await validateData(form, registerUserSchema);
 		expect(errors?.fieldErrors?.name).toStrictEqual(['Name muss mehr als 2 Zeichen haben']);
-	})
-	
+	});
+
 	it('test long name', async () => {
 		form.append('name', 'this is a very long name that is not allowed to be used as a name');
 		const { errors } = await validateData(form, registerUserSchema);
 		expect(errors?.fieldErrors?.name).toStrictEqual(['Name muss weniger als 64 Zeichen haben']);
-	})
-
-	it('test required email', async () => { 
-        const { errors } = await validateData(form, registerUserSchema);
-        expect(errors?.fieldErrors?.email).toStrictEqual(['Email ist erforderlich']);
-    });
-	
-	it('test invalid email', async () => { 
-		form.append('email', 'Maximilian Müller');
-        const { errors } = await validateData(form, registerUserSchema);
-        expect(errors?.fieldErrors?.email).toStrictEqual(['Email ist ungültig']);
-    });
-	
-	it('test required password', async () => { 
-        const { errors } = await validateData(form, registerUserSchema);
-        expect(errors?.fieldErrors?.password).toStrictEqual(['Passwort ist erforderlich']);
-    });
-	
-	it('test invalid password', async () => { 
-		form.append('password', '123456');
-        const { errors } = await validateData(form, registerUserSchema);
-        expect(errors?.fieldErrors?.password).toStrictEqual([
-					'Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl und ein Sonderzeichen enthalten'
-				]);
 	});
-})
+
+	it('test required email', async () => {
+		const { errors } = await validateData(form, registerUserSchema);
+		expect(errors?.fieldErrors?.email).toStrictEqual(['Email ist erforderlich']);
+	});
+
+	it('test invalid email', async () => {
+		form.append('email', 'Maximilian Müller');
+		const { errors } = await validateData(form, registerUserSchema);
+		expect(errors?.fieldErrors?.email).toStrictEqual(['Email ist ungültig']);
+	});
+
+	it('test required password', async () => {
+		const { errors } = await validateData(form, registerUserSchema);
+		expect(errors?.fieldErrors?.password).toStrictEqual(['Passwort ist erforderlich']);
+	});
+
+	it('test invalid password', async () => {
+		form.append('password', '123456');
+		const { errors } = await validateData(form, registerUserSchema);
+		expect(errors?.fieldErrors?.password).toStrictEqual([
+			'Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl und ein Sonderzeichen enthalten'
+		]);
+	});
+});

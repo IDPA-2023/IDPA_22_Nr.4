@@ -19,7 +19,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
-        env: 
+        env:
           DB_URL: ${{secrets.DB_URL}}
       - uses: actions/upload-artifact@v3
         if: always()
