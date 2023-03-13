@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { User } from "$lib/types";
+	import { getImageURL } from "$lib/utils";
 
     export let user: User | undefined;
 </script>
@@ -23,7 +24,7 @@
       <!-- svelte-ignore a11y-label-has-associated-control -->
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img alt="avatar" src={`https://ui-avatars.com/api/?name=${user?.name}`} />
+          <img alt="avatar" src={user?.avatar ? getImageURL(user?.collectionId, user?.id, user?.avatar, '80x80') : `https://ui-avatars.com/api/?name=${user?.name}`} />
         </div>
       </label>
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -34,7 +35,7 @@
             <span class="badge">New</span>
           </a>
         </li>
-        <li><a href="my/settings">Settings</a></li>
+        <li><a href="/my/settings">Settings</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
