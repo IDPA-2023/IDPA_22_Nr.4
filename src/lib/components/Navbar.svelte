@@ -34,7 +34,7 @@
             <span class="badge">New</span>
           </a>
         </li>
-        <li><a href="/settings">Settings</a></li>
+        <li><a href="my/settings">Settings</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
