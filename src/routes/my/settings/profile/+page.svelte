@@ -41,10 +41,10 @@
 
 <div class="flex flex-col w-full h-full">
     <form action="?/updateProfile" method="POST" class="flex flex-col space-y-2 w-full" enctype="multipart/form-data" use:enhance={submitUpdateProfile}>
-       <h3 class="text-2xl font-medium">Update Profile</h3>
+       <h3 class="text-2xl font-medium">Profil einstellen</h3>
        <div class="form-control w-fit max-w-lg">
         <label for="avatar" class="label font-medium pb-1">
-            <span class="label-text text-center ml-auto mr-auto">Profile Picture</span>
+            <span class="label-text text-center ml-auto mr-auto">Profilbild</span>
         </label>
         <label for="avatar" class="avatar w-32 rounded-full hover:cursor-pointer">
             <!--<label for="avatar" class="absolute -bottom-0.5 -right-0.5 hover:cursor-pointer">
@@ -55,7 +55,7 @@
             <div class="w-32 rounded-full">
                 <img src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar, '80x80') : `https://ui-avatars.com/api/?name=${data?.user?.name}`} alt="user avatar" id='avatar-preview' />
             </div>
-            <div class="w-10 p-2 rounded-full absolute btn-secondary bottom-0 right-0">
+            <div class="w-10 p-2 rounded-full absolute btn-secondary top-0 right-0">
                 <Icon src={Pencil}/>
             </div>
         </label>
@@ -64,7 +64,7 @@
        <Input id="name" label="Name" value={data?.user?.name} disabled={loading}/>
        <div class="w-full max-w-lg pt-3">
         <button class="btn btn-primary w-full max-w-lg" type="submit" disabled={loading}>
-            Update Profile
+            Einstellungen speichern
         </button>
        </div>
     </form>
