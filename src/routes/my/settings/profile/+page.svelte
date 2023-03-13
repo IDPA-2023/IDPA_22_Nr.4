@@ -41,7 +41,7 @@
 
 <div class="flex flex-col w-full h-full">
     <form action="?/updateProfile" method="POST" class="flex flex-col space-y-2 w-full" enctype="multipart/form-data" use:enhance={submitUpdateProfile}>
-       <h3 class="text-2xl font-medium">Profil einstellen</h3>
+       <h3 class="text-2xl font-medium">Profileinstellungen anpassen</h3>
        <div class="form-control w-fit max-w-lg">
         <label for="avatar" class="label font-medium pb-1">
             <span class="label-text text-center ml-auto mr-auto">Profilbild</span>
