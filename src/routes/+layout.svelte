@@ -14,6 +14,8 @@
 <div class="h-full from-primary to-secondary bg-gradient-to-br p-4">
 	<Navbar {user} />
 	<div class="py-4">
-		<slot />
+		<div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+			<slot />
+		</div>
 	</div>
 </div>
