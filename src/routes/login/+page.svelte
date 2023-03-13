@@ -13,7 +13,7 @@
 					await update();
 					break;
 				case 'failure':
-					toast.error('Invalid email or password');
+					toast.error('Ungülitge Email or Password');
 					await update();
 					break;
 				case 'error':
