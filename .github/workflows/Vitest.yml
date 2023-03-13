@@ -1,4 +1,4 @@
-name: Build SvelteKit
+name: Unit tests with vitest
 
 on:
   push:
@@ -18,6 +18,4 @@ jobs:
           node-version: 19
           cache: 'npm'
       - run: npm ci
-      - run: npm run build
-        env:
-          DB_URL: ${{secrets.DB_URL}}
+      - run: npm run test:unit
