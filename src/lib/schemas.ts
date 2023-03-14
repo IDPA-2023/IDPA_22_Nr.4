@@ -5,6 +5,37 @@ export const loginUserSchema = z.object({
 	password: z.string({ required_error: 'Passwort ist erforderlich' })
 });
 
+export const changePasswordSchema = z
+	.object({
+		oldPassword: z.string({ required_error: 'Passwort ist erforderlich' }),
+		password: z
+			.string({ required_error: 'Passwort ist erforderlich' })
+			.regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$\+!%*#?&.])[A-Za-z\d@$\+!%*#?&.]{8,}$/, {
+				message:
+					'Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl und ein Sonderzeichen enthalten'
+			}),
+		passwordConfirm: z
+			.string({ required_error: 'Passwort ist erforderlich' })
+			.regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$\+!%*#?&.])[A-Za-z\d@$\+!%*#?&.]{8,}$/, {
+				message:
+					'Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl und ein Sonderzeichen enthalten'
+			})
+	})
+	.superRefine(({ password, passwordConfirm }, ctx) => {
+		if (password !== passwordConfirm) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Passwörter stimmen nicht überein',
+				path: ['password']
+			});
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: 'Passwörter stimmen nicht überein',
+				path: ['passwordConfirm']
+			});
+		}
+	});
+
 export const registerUserSchema = z
 	.object({
 		name: z
@@ -33,12 +64,12 @@ export const registerUserSchema = z
 		if (password !== passwordConfirm) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: 'Passwörter stimmen nocht überein',
+				message: 'Passwörter stimmen nicht überein',
 				path: ['password']
 			});
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: 'Passwörter stimmen nocht überein',
+				message: 'Passwörter stimmen nicht überein',
 				path: ['passwordConfirm']
 			});
 		}
