@@ -3,6 +3,7 @@
     import { applyAction, enhance } from "$app/forms";
     import { invalidateAll } from "$app/navigation";
     import { Input, Modal } from "$lib/components";
+	import type { SubmitFunction } from "@sveltejs/kit";
     export let form: any;
     export let data: any;
     let emailModalIsOpen: boolean;
@@ -13,7 +14,7 @@
     $: userNameModalIsOpen = false
     $: loading = false
   
-    const submitUpdateEmail = () => {
+    const submitUpdateEmail: SubmitFunction = () => {
         loading = true
         emailModalIsOpen = true
   
@@ -33,7 +34,7 @@
         }
     }
   
-      const submitUpdateUsername = () => {
+      const submitUpdateUsername: SubmitFunction = () => {
           loading = true
           userNameModalIsOpen = true
   

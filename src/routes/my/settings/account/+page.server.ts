@@ -1,9 +1,9 @@
-import { error, type Actions } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import type { ClientResponseError } from "pocketbase";
-
+import type { Actions, PageServerLoad } from "./$types";
 import { redirect } from "@sveltejs/kit";
 
-export const load = ({ locals }) => {
+export const load: PageServerLoad = ({ locals }) => {
     if (!locals.pb.authStore.isValid){
         throw redirect(303, '/login')
     }
@@ -15,7 +15,7 @@ export const actions: Actions = {
 
         try {
             console.log(data.newEmail)
-            await locals.pb.collection('users').requestEmailChange(data.newEmail as string);
+            await locals.pb.collection('users').requestEmailChange('new@example.com');
         } catch(err) {
             console.log(err)
             throw error((err as ClientResponseError).status, (err as ClientResponseError).message)
