@@ -15,7 +15,7 @@ export const actions: Actions = {
 
         try {
             console.log(data.newEmail)
-            await locals.pb.collection('users').requestEmailChange('new@example.com');
+            await locals.pb.collection('users').requestEmailChange(data.newEmail as string);
         } catch(err) {
             console.log(err)
             throw error((err as ClientResponseError).status, (err as ClientResponseError).message)
