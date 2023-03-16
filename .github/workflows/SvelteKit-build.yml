@@ -1,11 +1,10 @@
-
 name: Build SvelteKit
 
 on:
   push:
-    branches: [master,beta]
+    branches: [master, beta]
   pull_request:
-    branches: [master,beta]
+    branches: [master, beta]
 
 jobs:
   build:
@@ -20,5 +19,5 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
-        env: 
+        env:
           DB_URL: ${{secrets.DB_URL}}
