@@ -21,36 +21,23 @@
 
 	let pollType = '';
 	let pollVisibility = '';
-	let title = '';
 	let majority: boolean;
 	let question: string;
-    let name : string;
+	let name: string = '';
+	let description : string = '';
 	$: pollType = 'multiple';
 	$: pollVisibility = 'public';
-	$: title = '';
 	$: majority = false;
 	$: question = '';
-    $: name = '';
+	$: description = '';
 
 	let error = '';
 	$: error = '';
 
-	let options: string[];
-	$: options = ['', ''];
-
-	const addOption = () => {
-		options[options.length] = '';
-	};
-
-	const removeOption = () => {
-		options.pop();
-	};
-
 	const changePageVisibility = () => {
 		console.log(pollType);
-		console.log(pollVisibility);
-		title = document.getElementsByName('name')[0].value;
-		if (pollVisibility !== '' && title !== '') {
+		console.log(name);
+		if (pollVisibility !== '' && name !== '') {
 			if (pollType === 'multiple') {
 				console.log('multiple if');
 				showPollMultiple = true;
@@ -70,6 +57,7 @@
 		} else {
 			error = 'Bitte wählen Sie eine Option aus oder füllen Sie das Eingabefeld aus';
 		}
+		console.log(showPollVisibility);
 	};
 
 	const changePageType = () => {
@@ -77,17 +65,12 @@
 		showPollVisibility = true;
 		error = '';
 	};
-
-	const changePageQuestion = () => {
-		if (question !== '') {
-		}
-	};
 </script>
 
 <div class="flex flex-col w-full h-full">
 	<div class="w-full">
 		<form action="?/addPoll" method="post">
-			<div class="w-full pt-10 {showPollType ? 'visible' : 'invisible h-0'}">
+			<div class="w-full {showPollType ? 'visible pt-10' : 'invisible h-0'}">
 				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsart auswählen</h3>
 				<p class="w-fit ml-auto mr-auto">Welche Art von Abstimmung soll es werden?</p>
 				<div class="ml-auto mr-auto w-fit mt-5">
@@ -113,6 +96,8 @@
 							</a>
 						</li>
 						<li>
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<!-- svelte-ignore a11y-missing-attribute -->
 							<a
 								on:click={() => {
 									pollType = 'yesNo';
@@ -129,6 +114,8 @@
 							</a>
 						</li>
 						<li>
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<!-- svelte-ignore a11y-missing-attribute -->
 							<a
 								on:click={() => {
 									pollType = 'random';
@@ -159,285 +146,153 @@
 					></button
 				>
 			</div>
-			<div class="w-full {showPollVisibility ? 'visible' : 'invisible h-0'}">
+			<div class="w-full {showPollVisibility ? 'visible pt-10' : 'invisible h-0'}">
 				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
 					Abstimmungssichtbarkeit auswählen
 				</h3>
 				<p class="w-fit ml-auto mr-auto">Wer soll an der Abstimmung teilnehmen dürfen?</p>
-				<div class="ml-auto mr-auto w-fit mt-5">
-					<div class="ml-auto mr-auto w-fit">
-						<Input id="name" bind:value={name} label="Titel der Abstimmung" placeholder="PollToll Abstimmung" />
-					</div>
-					<ul class="menu menu-horizontal rounded-box bg-secondary mt-5 text-black">
-						<li>
-							<a
-								on:click={() => {
-									pollVisibility = 'public';
-								}}
-							>
-								<div class="flex flex-col">
-									<p
-										class="font-bold ml-auto mr-auto {pollVisibility === 'public'
-											? 'text-white'
-											: ''}"
-									>
-										Öffentlich
-									</p>
-									<p class="text-sm w-40 ml-auto mr-auto text-center">
-										Die Abstimmung ist für alle ersichtlich und frei zugänglich
-									</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a
-								on:click={() => {
-									pollVisibility = 'privateLink';
-								}}
-							>
-								<div class="flex flex-col">
-									<p
-										class="font-bold ml-auto mr-auto {pollVisibility === 'privateLink'
-											? 'text-white'
-											: ''}"
-									>
-										Privat (mit Link Einladung)
-									</p>
-									<p class="text-sm w-40 ml-auto mr-auto text-center">
-										Alle, die den Link und den Zugangscode zur Abstimmung erhalten dürfen darin
-										teilnehmen
-									</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a
-								on:click={() => {
-									pollVisibility = 'privateUsers';
-								}}
-							>
-								<div class="flex flex-col">
-									<p
-										class="font-bold ml-auto mr-auto {pollVisibility === 'privateUsers'
-											? 'text-white'
-											: ''}"
-									>
-										Privat mit Login
-									</p>
-									<p class="text-sm w-40 ml-auto mr-auto text-center">
-										Alle Benutzer die registriert sind und eingeladen wurden und/oder zu einer
-										Gruppe gehören, die eingeladen wurde, dürfen teilnehmen.
-									</p>
-								</div>
-							</a>
-						</li>
-					</ul>
-					<input type="hidden" name="pollVisibility" id="pollVisibility" value={pollVisibility} />
-				</div>
-				<div class="flex w-fit ml-auto mr-auto">
-					<button
-						type="button"
-						on:click={() => {
-							showPollType = true;
-							showPollVisibility = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col mr-2"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" /><span
-								class="h-fit mt-auto mb-auto">Zurück</span
-							></span
-						></button
-					>
-					<button
-						type="button"
-						on:click={changePageVisibility}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><span class="h-fit mt-auto mb-auto">Weiter</span>
-							<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-						></button
-					>
-				</div>
-			</div>
-			<!--Ab hier kommen die Divs für die Erstellung der Fragen und Optionen-->
-			<!--Dieses Div ist für die Multiple Choice Page-->
-			<div class="w-full {showPollMultiple ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
-					Multiple Choice Abstimmung erstellen
-				</h3>
-				<p class="w-fit ml-auto mr-auto">Abstimmung mit mehreren Optionen</p>
-				<div class="ml-auto mr-auto w-fit flex flex-col">
-					<Input id="question" label="Frage" placeholder="Warum ist PollToll so toll!!!" />
-					<div class="divider" />
-					{#each options as option, index}
-						<Input
-							id={index.toString()}
-							label={'Option ' + (index + 1)}
-							placeholder={'Option ' + (index + 1)}
-						/>
-					{/each}
-					<div class="w-fit flex ml-auto mr-auto">
-						<button type="button" on:click={removeOption} class="btn btn-secondary ml-auto mr-auto"
-							>-</button
+				<div class="ml-auto mr-auto w-fit {showPollVisibility ? 'visible mt-5' : 'invisible h-0'}">
+					<div class="ml-auto mr-auto w-fit  {showPollVisibility ? 'visible' : 'invisible h-0'}">
+						<div
+							class="w-full max-w-lg ml-auto mr-auto {showPollVisibility
+								? 'visible mb-2'
+								: 'invisible h-0'}"
 						>
-						<button type="button" on:click={addOption} class="btn btn-secondary ml-auto mr-auto"
-							>+</button
-						>
-					</div>
-				</div>
-				<div class="flex w-fit ml-auto mr-auto">
-					<button
-						type="button"
-						on:click={() => {
-							showPollVisibility = true;
-							showPollMultiple = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col mr-2"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" /><span
-								class="h-fit mt-auto mb-auto">Zurück</span
-							></span
-						></button
-					>
-					<button
-						type="button"
-						on:click={() => {
-							showPollVisibility = false;
-							showPollVisibility = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><span class="h-fit mt-auto mb-auto">Weiter</span>
-							<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-						></button
-					>
-				</div>
-			</div>
-			<!--Dieses Div ist für die Ja/Nein Page-->
-			<div class="w-full {showPollYesNo ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Ja/Nein Abstimmung erstellen</h3>
-				<p class="w-fit ml-auto mr-auto">Abstimmung mit Ja/Nein Antworten oder Enthaltung</p>
-				<div class="ml-auto mr-auto w-fit">
-					<Input
-						id="question"
-						bind:value={question}
-						label="Frage"
-						placeholder="Ist PollToll toll?"
-					/>
-				</div>
-				<div class="flex w-fit ml-auto mr-auto">
-					<button
-						type="button"
-						on:click={() => {
-							showPollVisibility = true;
-							showPollYesNo = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col mr-2"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" /><span
-								class="h-fit mt-auto mb-auto">Zurück</span
-							></span
-						></button
-					>
-					<button
-						type="button"
-						on:click={() => {
-							showPollVisibility = false;
-							showPollVisibility = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><span class="h-fit mt-auto mb-auto">Weiter</span>
-							<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-						></button
-					>
-				</div>
-			</div>
-			<!--Dieses Div ist für die freie Antwort page-->
-			<div class="w-full {showPollRandom ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
-					Abstimmung mit freier Antwort erstellen
-				</h3>
-				<p class="w-fit ml-auto mr-auto">
-					Abstimmung, bei der man eine beliebige Antwort abgeben darf.
-				</p>
-				<div class="ml-auto mr-auto w-fit">
-					<Input id="question" label="Frage" placeholder="Warum ist PollToll so toll?!!" />
-				</div>
-				<div class="flex w-fit ml-auto mr-auto">
-					<button
-						type="button"
-						on:click={() => {
-							showPollVisibility = true;
-							showPollRandom = false;
-						}}
-						class="mt-5 btn btn-primary flex flex-col mr-2"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" /><span
-								class="h-fit mt-auto mb-auto">Zurück</span
-							></span
-						></button
-					>
-					<button
-						type="button"
-						on:click={() => {
-							showPollRandom = false;
-							showPollVariables = true;
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><span class="h-fit mt-auto mb-auto">Weiter</span>
-							<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-						></button
-					>
-				</div>
-			</div>
-			<div class="w-full {showPollVariables ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsvariablen</h3>
-				<p class="w-fit ml-auto mr-auto">Einstellung von Abstimmungsvariablen</p>
-				<div
-					class="w-fit ml-auto mr-auto {pollType !== 'random' && showPollVariables
-						? 'visible'
-						: 'invisible h-0'}"
-				>
-					<label class="label cursor-pointer flex">
-						<span class="label-text">Mehrheit Erforderlich</span>
-						<input
-							type="checkbox"
-							class="toggle"
-							on:click={() => {
-								majority ? (majority = false) : (majority = true);
-							}}
-						/>
-					</label>
-					<div class="w-fit ml-auto mr-auto {majority ? 'visible' : 'invisible h-0'}">
-						<div class="flex w-50">
-							<label for="absolut">Absolute Mehrheit</label>
-							<input type="radio" name="majority" id="absolut" value="absolut" class="ml-auto" />
-						</div>
-						<div class="flex">
-							<label for="relativ">Relative Mehrheit</label>
-							<input type="radio" name="majority" id="relativ" value="relativ" class="ml-auto" />
-						</div>
-						<div class="flex">
-							<label for="simple">Einfache Mehrheit</label>
-							<input type="radio" name="majority" id="simple" value="simple" class="ml-auto" />
-						</div>
-						<div class="flex">
-							<label for="qualified">2/3 Mehrheit</label>
+							<label for="title" class="label font-medium pb-1">
+								<span class="label-text">Titel</span>
+							</label>
 							<input
-								type="radio"
-								name="majority"
-								id="qualified"
-								value="qualified"
-								class="ml-auto"
+								class={'input input-bordered w-full max-w-lg'}
+								type="text"
+								id="title"
+								bind:value={name}
+								placeholder="PollToll Abstimmung"
 							/>
 						</div>
+						<div
+							class="w-full max-w-lg ml-auto mr-auto {showPollVisibility
+								? 'visible mb-2'
+								: 'invisible h-0'}"
+						>
+							<label for="title" class="label font-medium pb-1">
+								<span class="label-text">Beschreibung</span>
+							</label>
+							<input
+								class={'input input-bordered w-full max-w-lg'}
+								type="text"
+								id="description"
+								bind:value={description}
+								placeholder="PollToll Abstimmung"
+							/>
+						</div>
+						<ul class="menu menu-horizontal rounded-box bg-secondary mt-5 text-black">
+							<li>
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<!-- svelte-ignore a11y-missing-attribute -->
+								<a
+									on:click={() => {
+										pollVisibility = 'public';
+									}}
+								>
+									<div class="flex flex-col">
+										<p
+											class="font-bold ml-auto mr-auto {pollVisibility === 'public'
+												? 'text-white'
+												: ''}"
+										>
+											Öffentlich
+										</p>
+										<p class="text-sm w-40 ml-auto mr-auto text-center">
+											Die Abstimmung ist für alle ersichtlich und frei zugänglich
+										</p>
+									</div>
+								</a>
+							</li>
+							<li>
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<!-- svelte-ignore a11y-missing-attribute -->
+								<a
+									on:click={() => {
+										pollVisibility = 'privateLink';
+									}}
+								>
+									<div class="flex flex-col">
+										<p
+											class="font-bold ml-auto mr-auto {pollVisibility === 'privateLink'
+												? 'text-white'
+												: ''}"
+										>
+											Privat (mit Link Einladung)
+										</p>
+										<p class="text-sm w-40 ml-auto mr-auto text-center">
+											Alle, die den Link und den Zugangscode zur Abstimmung erhalten dürfen darin
+											teilnehmen
+										</p>
+									</div>
+								</a>
+							</li>
+							<li>
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<!-- svelte-ignore a11y-missing-attribute -->
+								<a
+									on:click={() => {
+										pollVisibility = 'privateUsers';
+									}}
+								>
+									<div class="flex flex-col">
+										<p
+											class="font-bold ml-auto mr-auto {pollVisibility === 'privateUsers'
+												? 'text-white'
+												: ''}"
+										>
+											Privat mit Login
+										</p>
+										<p class="text-sm w-40 ml-auto mr-auto text-center">
+											Alle Benutzer die registriert sind und eingeladen wurden und/oder zu einer
+											Gruppe gehören, die eingeladen wurde, dürfen teilnehmen.
+										</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+						<input type="hidden" name="pollVisibility" id="pollVisibility" value={pollVisibility} />
 					</div>
+					<div class="flex w-fit ml-auto mr-auto">
+						<button
+							type="button"
+							on:click={() => {
+								showPollType = true;
+								showPollVisibility = false;
+							}}
+							class="mt-5 btn btn-primary flex flex-col mr-2"
+							><span class="flex text-center btn-md"
+								><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" /><span
+									class="h-fit mt-auto mb-auto">Zurück</span
+								></span
+							></button
+						>
+						<button
+							type="button"
+							on:click={changePageVisibility}
+							class="mt-5 btn btn-primary flex flex-col"
+							><span class="flex text-center btn-md"
+								><span class="h-fit mt-auto mb-auto">Weiter</span>
+								<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
+							></button
+						>
+					</div>
+					<button type="submit" class="btn btn-primary mr-auto ml-auto">Abstimmung Speichern</button>
 				</div>
+				<!-- svelte-ignore a11y-label-has-associated-control -->
+				{#if error !== ''}
+				<div class="alert alert-warning shadow-lg w-fit ml-auto mr-auto mt-10">
+					<div>
+					  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+					  <span>{error}</span>
+					</div>
+				  </div>
+				{/if}
 			</div>
-			<label class="ml-auto mr-auto">{error}</label>
-			<button type="submit" class="btn btn-primary mr-auto ml-auto">Speichern</button>
 		</form>
 	</div>
 </div>
