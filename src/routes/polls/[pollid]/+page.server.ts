@@ -20,7 +20,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const getQuestion = async (pollId: string) => {
 		try {
 			const questions = serializeNonPOJOs<Question[]>(
-				await locals.pb.collection('question').getFullList({filter: `pollIDFS = '${pollId}'`})
+				await locals.pb.collection('question').getFullList({
+					filter: `pollIDFS = '${pollId}'`
+				})
 			);
 			return questions;
 		} catch (err) {
