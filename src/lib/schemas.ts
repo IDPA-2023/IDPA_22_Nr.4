@@ -47,7 +47,7 @@ export const registerUserSchema = z
 			.max(64, { message: 'Name muss weniger als 64 Zeichen haben' })
 			.trim(),
 		email: z
-			.string({ required_error: 'Email is required' })
+			.string({ required_error: 'Email ist erforderlich' })
 			.email({ message: 'Email ist ungültig' }),
 		password: z
 			.string({ required_error: 'Passwort ist erforderlich' })
