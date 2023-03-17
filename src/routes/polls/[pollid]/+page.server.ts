@@ -1,4 +1,4 @@
-import type { Poll, Question } from '$lib/types';
+import type { Poll, Question, Vote } from '$lib/types';
 import { serializeNonPOJOs } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 import type { ClientResponseError } from 'pocketbase';
@@ -31,8 +31,23 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 	};
 
+	const getVotes = async (pollId: string) => { 
+		try {
+			const votes = serializeNonPOJOs<Vote[]>(await locals.pb.collection('vote').getFullList({
+				expand: 'questionIDFS,userIDFS',
+				filter: `questionIDFS.pollIDFS = '${pollId}'`
+			}));
+			return votes;
+		} catch (err) {
+			const e = err as ClientResponseError;
+			throw error(e.status, e.message);
+		}
+	}
+
 	return {
 		poll: getPoll(params.pollid),
-		questions: getQuestion(params.pollid)
+		questions: getQuestion(params.pollid),
+		votes: getVotes(params.pollid)
 	};
 };
+

@@ -3,7 +3,7 @@
     import type { PageData } from "./$types";
 
     export let data: PageData;
-    console.log(data);
+    data.votes.forEach(vote => console.log(vote.expand));
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
@@ -19,7 +19,7 @@
     </div>
     {#each data.questions as question}
         <div class="mt-5 w-full">
-            <Question {question} />
+            <Question {question} votes={data.votes}/>
         </div>
     {/each}
 </div>
