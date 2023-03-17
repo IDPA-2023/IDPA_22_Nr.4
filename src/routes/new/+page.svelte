@@ -24,7 +24,7 @@
 	let majority: boolean;
 	let question: string;
 	let name: string = '';
-	let description : string = '';
+	let description: string = '';
 	$: pollType = 'multiple';
 	$: pollVisibility = 'public';
 	$: majority = false;
@@ -165,6 +165,7 @@
 								class={'input input-bordered w-full max-w-lg'}
 								type="text"
 								id="title"
+								name="title"
 								bind:value={name}
 								placeholder="PollToll Abstimmung"
 							/>
@@ -181,6 +182,7 @@
 								class={'input input-bordered w-full max-w-lg'}
 								type="text"
 								id="description"
+								name="description"
 								bind:value={description}
 								placeholder="PollToll Abstimmung"
 							/>
@@ -271,7 +273,7 @@
 								></span
 							></button
 						>
-						<button
+						<!--<button
 							type="button"
 							on:click={changePageVisibility}
 							class="mt-5 btn btn-primary flex flex-col"
@@ -279,18 +281,30 @@
 								><span class="h-fit mt-auto mb-auto">Weiter</span>
 								<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
 							></button
-						>
+						>-->
 					</div>
-					<button type="submit" class="btn btn-primary mr-auto ml-auto">Abstimmung Speichern</button>
+					<button type="submit" class="btn btn-primary mr-auto ml-auto">Abstimmung Speichern</button
+					>
 				</div>
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				{#if error !== ''}
-				<div class="alert alert-warning shadow-lg w-fit ml-auto mr-auto mt-10">
-					<div>
-					  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-					  <span>{error}</span>
+					<div class="alert alert-warning shadow-lg w-fit ml-auto mr-auto mt-10">
+						<div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="stroke-current flex-shrink-0 h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								><path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/></svg
+							>
+							<span>{error}</span>
+						</div>
 					</div>
-				  </div>
 				{/if}
 			</div>
 		</form>
