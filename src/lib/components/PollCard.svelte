@@ -9,7 +9,7 @@
 		<h2 class="card-title">{poll.name}</h2>
 		<p>{poll.description}</p>
 		<div class="card-actions justify-end">
-			<button class="btn btn-primary">Resultate anschauen</button>
+			<a href={`/polls/${poll.id}`} class="btn btn-primary">Resultate anschauen</a>
 		</div>
 	</div>
 </div>

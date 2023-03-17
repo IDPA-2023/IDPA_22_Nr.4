@@ -5,5 +5,8 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['tests/unit/**/*.{test,spec}.{js,ts}']
+	},
+	build: {
+		target: 'esnext'
 	}
 });

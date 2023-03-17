@@ -12,6 +12,7 @@
                     {data.poll.name}
                 </h2>
             </div>
+            <p>{data.poll.description}</p>
         </div>
     </div>  
 </div>
