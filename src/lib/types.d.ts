@@ -21,3 +21,7 @@ interface Question extends Record {
 	question: string;
 	type: "modal" | "checkbox" | "free" | "select";
 }
+
+interface Vote extends Record { 
+	vote: string;
+}
