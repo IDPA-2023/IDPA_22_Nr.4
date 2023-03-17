@@ -1,10 +1,9 @@
 <script lang="ts">
 	import type { Question, User, Vote } from "$lib/types";
+	import { Chart, Table } from "$lib/components";
 
   export let question: Question
   export let votes: Vote[]
-
-  let users = votes.map(vote => vote.expand.userIDFS as User)
 </script>
 
 <div class="mockup-window border-base-100 bg-base-300">
@@ -14,9 +13,10 @@
     </h3>
   </div>
   <div class="p-3 bg-base-200">
-    {#each votes as vote, i}
-      <p>{vote.vote}</p>
-      <p>{users[i].name}</p>
-    {/each}
+    {#if question.type === "modal" || question.type === "select" || question.type === "checkbox"}
+      <Chart />
+    {:else}
+      <Table {votes} />
+    {/if}
   </div>
 </div>
