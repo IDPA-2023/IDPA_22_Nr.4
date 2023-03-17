@@ -15,3 +15,9 @@ interface Poll extends Record {
 	requireLogin: boolean;
 	description: string;
 }
+
+interface Question extends Record { 
+	id: string;
+	question: string;
+	type: "modal" | "checkbox" | "free" | "select";
+}
