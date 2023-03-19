@@ -11,12 +11,12 @@
 	</div>
 	<div class="flex-none gap-2">
 		<div class="form-control">
-			<input type="text" placeholder="Search" class="input input-bordered" />
+			<input type="text" placeholder="Suchen" class="input input-bordered" />
 		</div>
 		{#if !user}
 			<div class="dropdown dropdown-end">
 				<a href="/login" class="btn btn-primary">Login</a>
-				<a href="/register" class="btn btn-secondary">Register</a>
+				<a href="/register" class="btn btn-secondary">Registrieren</a>
 			</div>
 		{:else}
 			<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
@@ -40,11 +40,11 @@
 				>
 					<li>
 						<a href="/profile" class="justify-between">
-							Profile
-							<span class="badge">New</span>
+							Meine Abstimmungen
+							<span class="badge">Neu</span>
 						</a>
 					</li>
-					<li><a href="/my/settings">Settings</a></li>
+					<li><a href="/my/settings">Einstellungen</a></li>
 					<li><a href="/logout">Logout</a></li>
 				</ul>
 			</div>

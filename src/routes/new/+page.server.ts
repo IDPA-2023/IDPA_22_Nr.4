@@ -2,7 +2,8 @@ import { error, type Actions } from '@sveltejs/kit';
 import type { ClientResponseError } from 'pocketbase';
 
 import { redirect } from '@sveltejs/kit';
-export const load = ({ locals }) => {
+import type { PageServerLoad } from '../$types';
+export const load : PageServerLoad = ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		throw redirect(303, '/login');
 	}
@@ -11,6 +12,7 @@ export const load = ({ locals }) => {
 export const actions : Actions = {
     addPoll: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData())
+        let pollId = ''
 
         try {
             let publicBool : boolean = false
@@ -39,7 +41,33 @@ export const actions : Actions = {
 
                 console.log(sendData)
 
-                const record = await locals.pb.collection('poll').create(sendData);
+                try {
+                    const record = await locals.pb.collection('poll').create(sendData);
+                    pollId = record.id
+                } catch (err) {
+                    throw error((err as ClientResponseError).status, (err as ClientResponseError).message)
+                }
+
+                try {
+                    const variableData = {
+                        "surveyIDFS": pollId,
+                        "type": data.radioMehr
+                    }
+
+                    const variable1 = await locals.pb.collection('variable').create(variableData)
+
+                    const variableData2 = {
+                        "surveyIDFS": pollId,
+                        "type": 'date',
+                        "startDate": data.startdate as string,
+                        "endDate": data.enddate as string
+                    }
+                    
+                    const variable2 = await locals.pb.collection('variable').create(variableData2)
+
+                } catch (err) {
+                    throw error((err as ClientResponseError).status, (err as ClientResponseError).message)
+                }
             }else{
                 throw error(400, "Something went wrong!!!")
             }
@@ -47,5 +75,6 @@ export const actions : Actions = {
             console.log(err)
             throw error((err as ClientResponseError).status, (err as ClientResponseError).message)
         }
+        throw redirect(303, `/polls/${pollId}/questions`) 
     }
 }

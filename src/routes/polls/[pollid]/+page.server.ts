@@ -45,9 +45,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	}
 
 	return {
-		poll: getPoll(params.pollid),
-		questions: getQuestion(params.pollid),
-		votes: getVotes(params.pollid)
+		poll: getPoll(params.pollId),
+		questions: getQuestion(params.pollId),
+		votes: getVotes(params.pollId)
 	};
 };
 

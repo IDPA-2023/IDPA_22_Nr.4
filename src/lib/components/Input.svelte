@@ -32,6 +32,7 @@
 		{placeholder}
 		{disabled}
 		{required}
+		id={id}
 		name={id}
 		{value}
 	/>
