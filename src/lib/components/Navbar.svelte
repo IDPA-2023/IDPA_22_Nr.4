@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
+	import { getImageURL } from '$lib/utils';
 
 	export let user: User | undefined;
 </script>
@@ -10,20 +11,26 @@
 	</div>
 	<div class="flex-none gap-2">
 		<div class="form-control">
-			<input type="text" placeholder="Search" class="input input-bordered" />
+			<input type="text" placeholder="Suchen" class="input input-bordered" />
 		</div>
 		{#if !user}
 			<div class="dropdown dropdown-end">
 				<a href="/login" class="btn btn-primary">Login</a>
-				<a href="/register" class="btn btn-secondary">Register</a>
+				<a href="/register" class="btn btn-secondary">Registrieren</a>
 			</div>
 		{:else}
+			<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
 			<div class="dropdown dropdown-end">
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<!-- svelte-ignore a11y-label-has-associated-control -->
 				<label tabindex="0" class="btn btn-ghost btn-circle avatar">
 					<div class="w-10 rounded-full">
-						<img alt="avatar" src={`https://ui-avatars.com/api/?name=${user?.name}`} />
+						<img
+							alt="avatar"
+							src={user?.avatar
+								? getImageURL(user?.collectionId, user?.id, user?.avatar, '80x80')
+								: `https://ui-avatars.com/api/?name=${user?.name}`}
+						/>
 					</div>
 				</label>
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -33,11 +40,11 @@
 				>
 					<li>
 						<a href="/profile" class="justify-between">
-							Profile
-							<span class="badge">New</span>
+							Meine Abstimmungen
+							<span class="badge">Neu</span>
 						</a>
 					</li>
-					<li><a href="/settings">Settings</a></li>
+					<li><a href="/my/settings">Einstellungen</a></li>
 					<li><a href="/logout">Logout</a></li>
 				</ul>
 			</div>

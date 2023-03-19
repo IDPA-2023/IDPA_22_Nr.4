@@ -6,6 +6,9 @@ export default defineConfig({
 	test: {
 		include: ['tests/unit/**/*.{test,spec}.{js,ts}']
 	},
+	ssr: {
+		noExternal: ['svelte-hero-icons']
+	},
 	build: {
 		target: 'esnext'
 	}

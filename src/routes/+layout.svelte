@@ -11,7 +11,7 @@
 </script>
 
 <Toaster />
-<div class="h-full from-primary to-secondary bg-gradient-to-br p-4">
+<div class="h-full from-primary to-secondary bg-gradient-to-br p-4 overflow-scroll">
 	<Navbar {user} />
 	<div class="py-4">
 		<div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
