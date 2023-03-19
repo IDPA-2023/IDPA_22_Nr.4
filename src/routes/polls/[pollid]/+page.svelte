@@ -3,7 +3,6 @@
     import type { PageData } from "./$types";
 
     export let data: PageData;
-    data.votes.forEach(vote => console.log(vote.expand));
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
