@@ -7,3 +7,21 @@ interface User extends Record {
 	name: string;
 	avatar?: string;
 }
+
+interface Poll extends Record {
+	id: string;
+	name: string;
+	public: boolean;
+	requireLogin: boolean;
+	description: string;
+}
+
+interface Question extends Record { 
+	id: string;
+	question: string;
+	type: "modal" | "checkbox" | "free" | "select";
+}
+
+interface Vote extends Record { 
+	vote: string;
+}

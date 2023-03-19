@@ -62,6 +62,11 @@
 					errors={form?.errors?.password}
 					disabled={loading}
 				/>
+				<a
+					href="/reset-password"
+					class="text-primary font-medium hover:cursor-pointer hover:underline"
+					>Passowort vergessen?</a
+				>
 				<div class="w-full max-w-md pt-2">
 					<button type="submit" class="btn btn-primary w-full" disabled={loading}>Login</button>
 				</div>
