@@ -52,8 +52,6 @@
 		error = '';
 	};
 
-	export let data : PageData
-
 </script>
 <div class="w-full">
 	<form action="?/addQuestion" method="post" class="flex flex-col">

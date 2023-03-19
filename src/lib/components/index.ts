@@ -6,4 +6,4 @@ import Question from './Question.svelte';
 import Chart from './Chart.svelte';
 import Table from './Table.svelte';
 
-export { Navbar, Input, PollCard, Question, Chart, Table };
+export { Navbar, Input, PollCard, Question, Chart, Table, Modal };
