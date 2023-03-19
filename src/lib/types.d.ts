@@ -19,7 +19,7 @@ interface Poll extends Record {
 interface Question extends Record { 
 	id: string;
 	question: string;
-	type: "modal" | "checkbox" | "free" | "select";
+	type: "modal" | "checkbox" | "free" | "select" | "radio" | "multiple" | "yesNo";
 }
 
 interface Vote extends Record { 
