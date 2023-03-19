@@ -4,6 +4,11 @@
 
   export let question: Question
   export let votes: Vote[]
+
+  votes = votes.filter(vote => {
+    return vote.questionIDFS === question.id
+  })
+
 </script>
 
 <div class="mockup-window border-base-100 bg-base-300">
@@ -13,10 +18,10 @@
     </h3>
   </div>
   <div class="p-3 bg-base-200">
-    {#if question.type === "modal" || question.type === "select" || question.type === "checkbox"}
-      <Chart />
+    {#if question.type === "modal" || question.type === "select" || question.type === "checkbox" || question.type === "radio" || question.type === "multiple" || question.type === "yesNo"}
+    <Chart {votes}/>
     {:else}
-      <Table {votes} />
+    <Table {votes} />
     {/if}
   </div>
 </div>

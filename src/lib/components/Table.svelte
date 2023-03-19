@@ -7,10 +7,15 @@
 </script>
 
 <div class="overflow-x-auto">
-  <table class="table w-full">
-    <!-- head -->
-    <thead>
-      <tr>
+  {#if votes.length === 0}
+    <div class="flex justify-center">
+      <p class="text-xl">Noch keine Abstimmungen 😥</p>
+    </div>
+    {:else}
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+        <tr>
         <th>Name</th>
         <th>Abgestummen</th>
       </tr>
@@ -25,4 +30,5 @@
       {/each}
     </tbody>
   </table>
+  {/if}
 </div>
