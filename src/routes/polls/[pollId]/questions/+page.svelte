@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import type { Question } from "$lib/types";
 	import type { PageData } from "./$types";
@@ -23,5 +22,3 @@
         </div>
     </div>
 {/each}-->
-
-
