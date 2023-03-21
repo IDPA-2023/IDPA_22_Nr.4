@@ -9,7 +9,7 @@
 	<div class="card w-full max-w-fit bg-base-100 shadow-xl">
 		<div class="card-body">
             <div class="card-title">
-                <h2 class="text-5xl">
+                <h2 class="text-2xl font-bold lg:text-5xl">
                     {data.poll.name}
                 </h2>
             </div>
