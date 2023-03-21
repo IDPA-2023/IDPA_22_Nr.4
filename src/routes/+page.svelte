@@ -8,7 +8,7 @@
     <h1 class="text-xl font-bold">Aktuelle Abstimmungen</h1>
     <div class="grid grid-cols-1 gap-4">
         {#each data.polls as poll}
-            <PollCard {poll} />
+            <PollCard {poll} user={data.user} />
         {/each}
     </div>
 </div>

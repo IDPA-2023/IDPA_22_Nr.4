@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { page } from "$app/stores";
 	import { Question } from "$lib/components";
+	import { Icon, PencilSquare } from "svelte-hero-icons";
     import type { PageData } from "./$types";
 
     export let data: PageData;
@@ -13,7 +15,14 @@
                     {data.poll.name}
                 </h2>
             </div>
-            <p>{data.poll.description}</p>
+            <div class="flex flex-row">
+                <p>{data.poll.description}</p>
+                {#if data.poll.hostIDFS === data.user?.id}
+                    <div class="w-10 p-2 rounded-full absolute btn-secondary -top-3 -right-3">
+                        <a href={`${$page.url.pathname}/edit`}><Icon src={PencilSquare} /></a>
+                    </div>
+                {/if}
+            </div>
         </div>
     </div>
     {#each data.questions as question}
