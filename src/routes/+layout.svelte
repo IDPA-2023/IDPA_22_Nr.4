@@ -11,9 +11,11 @@
 </script>
 
 <Toaster />
-<div class="h-full from-primary to-secondary bg-gradient-to-br p-4">
+<div class="from-primary to-secondary min-h-full bg-gradient-to-br p-4">
 	<Navbar {user} />
 	<div class="py-4">
-		<slot />
+		<div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 h-full">
+			<slot />
+		</div>
 	</div>
 </div>

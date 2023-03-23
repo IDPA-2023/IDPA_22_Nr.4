@@ -5,5 +5,11 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
 		include: ['tests/unit/**/*.{test,spec}.{js,ts}']
+	},
+	ssr: {
+		noExternal: ['svelte-hero-icons']
+	},
+	build: {
+		target: 'esnext'
 	}
 });
