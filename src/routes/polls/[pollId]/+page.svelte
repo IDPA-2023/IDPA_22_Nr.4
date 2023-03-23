@@ -18,7 +18,7 @@
             <div class="flex flex-row">
                 <p>{data.poll.description}</p>
                 {#if data.poll.hostIDFS === data.user?.id}
-                    <div class="w-10 p-2 rounded-full absolute btn-secondary -top-3 -right-3">
+                    <div class="w-10 p-2 rounded-full cursor-pointer absolute btn-secondary -top-3 -right-3">
                         <a href={`${$page.url.pathname}/edit`}><Icon src={PencilSquare} /></a>
                     </div>
                 {/if}

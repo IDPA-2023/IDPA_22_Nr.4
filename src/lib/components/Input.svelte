@@ -17,7 +17,6 @@
 	export let disabled: boolean = false;
 	export let required: boolean = false;
 	export let errors: string[] | undefined = [];
-	console.log(value);
 </script>
 
 <div class="form-control w-full max-w-lg mb-2">
