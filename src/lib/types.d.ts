@@ -16,12 +16,12 @@ interface Poll extends Record {
 	description: string;
 }
 
-interface Question extends Record { 
+interface Question extends Record {
 	id: string;
 	question: string;
-	type: "modal" | "checkbox" | "free" | "select" | "radio" | "multiple" | "yesNo";
+	type: 'modal' | 'checkbox' | 'free' | 'select' | 'radio' | 'multiple' | 'yesNo';
 }
 
-interface Vote extends Record { 
+interface Vote extends Record {
 	vote: string;
 }

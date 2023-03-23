@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Poll } from "$lib/types";
+	import type { Poll } from '$lib/types';
 
 	export let poll: Poll;
 </script>
