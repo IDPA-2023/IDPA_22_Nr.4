@@ -14,11 +14,11 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.28.1",
+		"@playwright/test": "^1.31.2",
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
+		"@sveltejs/kit": "^1.10.0",
+		"@typescript-eslint/eslint-plugin": "^5.54.1",
+		"@typescript-eslint/parser": "^5.54.1",
 		"autoprefixer": "^10.4.13",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -38,9 +38,9 @@
 	"type": "module",
 	"dependencies": {
 		"@tailwindcss/typography": "^0.5.9",
-		"daisyui": "^2.51.0",
 		"pocketbase": "^0.12.0",
 		"svelte-french-toast": "^1.0.3",
-		"zod": "^3.20.6"
+		"zod": "^3.20.6",
+		"daisyui": "^2.51.3"
 	}
 }

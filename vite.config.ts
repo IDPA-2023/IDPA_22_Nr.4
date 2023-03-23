@@ -4,9 +4,12 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
 	plugins: [sveltekit()],
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
+		include: ['tests/unit/**/*.{test,spec}.{js,ts}']
 	},
 	ssr: {
-		noExternal: ["svelte-hero-icons"],
+		noExternal: ['svelte-hero-icons']
+	},
+	build: {
+		target: 'esnext'
 	}
 });
