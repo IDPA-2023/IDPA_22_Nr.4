@@ -42,7 +42,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="card p-3 w-full max-w-lg bg-base-100 shadow-xl">
+	<div class="card p-6 w-full max-w-lg bg-base-100 shadow-xl">
 		<form action="?/editPoll" method="POST" use:enhance={SubmitUpdatePoll}>
 			<Input
 				id="title"
@@ -58,7 +58,7 @@
 				value={form?.data.description ?? data.poll.description}
 				label="Beschreibung"
 			/>
-			<input disabled={loading} type="submit" class="btn btn-primary w-full" value="Speichern" />
+			<input disabled={loading} type="submit" class="btn btn-primary mt-2 w-full" value="Speichern" />
 		</form>
 	</div>
 </div>

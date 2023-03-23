@@ -10,9 +10,6 @@
 		<a href="/" class="btn btn-ghost normal-case text-xl">PollToll</a>
 	</div>
 	<div class="flex-none gap-2">
-		<div class="form-control">
-			<input type="text" placeholder="Suchen" class="input input-bordered" />
-		</div>
 		{#if !user}
 			<div class="dropdown dropdown-end">
 				<a href="/login" class="btn btn-primary">Login</a>
