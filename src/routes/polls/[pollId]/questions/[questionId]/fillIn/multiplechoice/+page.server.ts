@@ -1,26 +1,47 @@
 import type { PageServerLoad } from "./$types";
-import { redirect } from "@sveltejs/kit";
+import { redirect, error } from "@sveltejs/kit";
+import { serializeNonPOJOs } from "$lib/utils"
+import type { Option, Question } from "$lib/types"
+import type { ClientResponseError } from 'pocketbase';
 
 export const load: PageServerLoad = ({ locals, params }) => {
     if (!locals.pb.authStore.isValid) {
         throw redirect(303, '/login');
     }
 
-    const getValues = async () => {
-        const questionId = params.questionId
-        // fetch a paginated records list
-        const resultList = await pb.collection('option').getList(1, 50, {
-            filter: `questionId = ${questionId}`
-        });
-
-        // or fetch only the first record that matches the specified filter
-        const record = await pb.collection('question').getFirstListItem(`questionId = ${questionId}`);
-
-        return {
-            question: record, optionList: resultList
+    const getOptions = async (questionId: string) => {
+        try {
+            const options = serializeNonPOJOs<Option[]>(await locals.pb.collection('option').getFullList({
+                filter: `questionIDFS = "${questionId}"`
+            }));
+            return options;
+        } catch (err) {
+            const e = err as ClientResponseError;
+            throw error(e.status, e.message);
         }
 
+        
     }
- return {values: getValues()}
+    
+    const getQuestion = async (questionId: string) => {
+        try {
+            const question = serializeNonPOJOs<Question>(await locals.pb.collection('question').getFirstListItem(`id="${questionId}"`));
+            return question;
+        } catch (err) {
+            const e = err as ClientResponseError
+            throw error(e.status, e.message)
+        }
+    }
+
+    return {
+        options: getOptions(params.questionId),
+        question: getQuestion(params.questionId)
+    }
+}
+
+export const actions: Actions = {
+    createVote: async ({locals, request}) => {
+        console.log(Object.fromEntries(await request.formData()))
+    }
 }
 
