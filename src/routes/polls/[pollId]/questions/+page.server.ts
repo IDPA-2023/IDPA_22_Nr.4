@@ -1,4 +1,4 @@
-import type { PageServerLoad } from "../$types";
+import type { PageServerLoad } from "./$types";
 import { redirect } from '@sveltejs/kit';
 import { serializeNonPOJOs } from "$lib/utils";
 import type { Question } from "$lib/types";
@@ -19,6 +19,7 @@ export const load : PageServerLoad = ({ locals, params }) => {
             }*/
 
             const questions = serializeNonPOJOs<Question []>(await locals.pb.collection('question').getFullList({filter: `pollIDFS="${pollId}"`}))
+            console.log(questions)
 
             return {
                 questions: questions

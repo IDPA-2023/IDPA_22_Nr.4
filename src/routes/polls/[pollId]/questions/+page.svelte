@@ -5,14 +5,14 @@
 
     export let data : PageData
 
-    console.log(data.pollId)
+    console.log(data.questions)
 </script>
 
 <div class="w-full mt-5 flex">
     <a href="/polls/{data.pollId}/questions/new" class="btn btn-primary">Neue Frage hinzufügen</a>
 </div>
 
-<!--{#each data.questions as question}
+{#each data.questions as question}
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
             <h2 class="card-title">{question.question}</h2>
@@ -22,6 +22,6 @@
             </div>
         </div>
     </div>
-{/each}-->
+{/each}
 
 
