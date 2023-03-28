@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MultipleChoice, YesOrNo } from '$lib/components/vote';
+	import { FreeInput, MultipleChoice, Select, YesOrNo } from '$lib/components/vote';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -12,6 +12,10 @@
 				<YesOrNo {question} />
 			{:else if question.type === 'multiple'}
 				<MultipleChoice options={data.options} {question} />
+            {:else if question.type === 'free'}
+                <FreeInput {question} />
+            {:else if question.type === 'select'}
+                <Select options={data.options} {question} />
 			{/if}
 		{/each}
 		<div class="w-full mt-4 max-w-md pt-2">
