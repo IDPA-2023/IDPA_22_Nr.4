@@ -4,7 +4,7 @@
 	import { Icon, Plus, PlusCircle } from 'svelte-hero-icons';
 
 	export let user: User | undefined;
-	$: innerWidth = 0
+	$: innerWidth = 1000
 </script>
 
 <svelte:window bind:innerWidth />
@@ -19,10 +19,10 @@
 				<a href="/register" class="btn btn-secondary">Registrieren</a>
 			</div>
 		{:else}
-			{#if innerWidth < 426}
-			<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus} /></a>
+			{#if innerWidth > 426}
+				<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
 			{:else}
-			<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
+				<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus}/></a>
 			{/if}
 			<div class="dropdown dropdown-end">
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
