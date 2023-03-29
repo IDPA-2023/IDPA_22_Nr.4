@@ -2,7 +2,7 @@ import type { Poll, userGroup } from "$lib/types";
 import { serializeNonPOJOs } from "$lib/utils";
 import type { ClientResponseError } from "pocketbase";
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from "./$types";
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ locals }) => {
     const getPolls = async () => {
@@ -29,7 +29,7 @@ export const load: PageServerLoad = ({ locals }) => {
         }
     }
 
-    return {
-        polls: getPolls(),
-    }
-}
+	return {
+		polls: getPolls()
+	};
+};

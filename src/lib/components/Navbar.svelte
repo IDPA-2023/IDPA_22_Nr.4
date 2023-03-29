@@ -1,10 +1,13 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
 	import { getImageURL } from '$lib/utils';
+	import { Icon, Plus, PlusCircle } from 'svelte-hero-icons';
 
 	export let user: User | undefined;
+	$: innerWidth = 1000
 </script>
 
+<svelte:window bind:innerWidth />
 <div class="navbar bg-base-100 w-auto rounded-md shadow-2xl">
 	<div class="flex-1">
 		<a href="/" class="btn btn-ghost normal-case text-xl">PollToll</a>
@@ -16,7 +19,11 @@
 				<a href="/register" class="btn btn-secondary">Registrieren</a>
 			</div>
 		{:else}
-			<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
+			{#if innerWidth > 426}
+				<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
+			{:else}
+				<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus}/></a>
+			{/if}
 			<div class="dropdown dropdown-end">
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<!-- svelte-ignore a11y-label-has-associated-control -->

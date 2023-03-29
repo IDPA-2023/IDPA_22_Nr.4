@@ -1,25 +1,24 @@
 <script lang="ts">
-	import { Input } from "$lib/components";
-	import { ChevronLeft, ChevronRight, Icon } from "svelte-hero-icons";
-	import type { PageData } from "./$types";
+	import { Input } from '$lib/components';
+	import { ChevronLeft, ChevronRight, Icon } from 'svelte-hero-icons';
+	import type { PageData } from './$types';
 
+	let showPollMultiple: boolean;
+	let showPollRandom: boolean;
+	let showPollYesNo: boolean;
+	let showPollType: boolean;
 
-	let showPollMultiple : boolean
-	let showPollRandom : boolean
-	let showPollYesNo : boolean
-	let showPollType : boolean
-
-	$:showPollMultiple = false
-	$:showPollRandom = false
-	$:showPollYesNo = false 
-	$: showPollType = true
+	$: showPollMultiple = false;
+	$: showPollRandom = false;
+	$: showPollYesNo = false;
+	$: showPollType = true;
 
 	let options: string[];
 	let question: string;
-	let pollType : string;
+	let pollType: string;
 	$: options = ['', ''];
 	$: question = '';
-	$: pollType = 'multiple'
+	$: pollType = 'multiple';
 
 	let error: string;
 
@@ -40,19 +39,19 @@
 	};
 
 	const changePageType = () => {
-		showPollType = false
+		showPollType = false;
 
-		if(pollType === 'random'){
-			showPollRandom = true
-		}else if(pollType === 'multiple'){
-			showPollMultiple = true
-		}else if(pollType === 'yesNo'){
-			showPollYesNo = true
+		if (pollType === 'random') {
+			showPollRandom = true;
+		} else if (pollType === 'multiple') {
+			showPollMultiple = true;
+		} else if (pollType === 'yesNo') {
+			showPollYesNo = true;
 		}
 		error = '';
 	};
-
 </script>
+
 <div class="w-full">
 	<form action="?/addQuestion" method="post" class="flex flex-col">
 		<div class="w-full {showPollType ? 'visible' : 'invisible h-0'}">
@@ -69,9 +68,7 @@
 							}}
 						>
 							<div class="flex flex-col">
-								<p
-									class="font-bold ml-auto mr-auto {pollType === 'multiple' ? 'text-white' : ''}"
-								>
+								<p class="font-bold ml-auto mr-auto {pollType === 'multiple' ? 'text-white' : ''}">
 									Multiple Choice
 								</p>
 								<p class="text-sm w-40 ml-auto mr-auto text-center">
@@ -131,121 +128,140 @@
 				></button
 			>
 		</div>
-		
+
 		<!--Ab hier kommen die Divs für die Erstellung der Fragen und Optionen-->
 		<!--Dieses Div ist für die Multiple Choice Page-->
 		{#if showPollMultiple}
-		<div class="w-full">
-			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Multiple Choice Abstimmung erstellen</h3>
-			<p class="w-fit ml-auto mr-auto">Abstimmung mit mehreren Optionen</p>
-			<div class="card w-full max-w-fit bg-base-100 shadow-xl ml-auto mr-auto">
-				<div class="card-body ml-auto mr-auto">
-					<div class="ml-auto mr-auto w-fit flex flex-col">
-						<Input id="question" label="Frage" placeholder="Warum ist PollToll so toll!!!" required={true}/>
-						<div class="divider" />
-						{#each options as option, index}
+			<div class="w-full">
+				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
+					Multiple Choice Abstimmung erstellen
+				</h3>
+				<p class="w-fit ml-auto mr-auto">Abstimmung mit mehreren Optionen</p>
+				<div class="card w-full max-w-fit bg-base-100 shadow-xl ml-auto mr-auto">
+					<div class="card-body ml-auto mr-auto">
+						<div class="ml-auto mr-auto w-fit flex flex-col">
 							<Input
-								id={'option'+index.toString()}
-								value={option}
-								label={'Option ' + (index + 1)}
-								placeholder={'Option ' + (index + 1)}
+								id="question"
+								label="Frage"
+								placeholder="Warum ist PollToll so toll!!!"
 								required={true}
 							/>
-						{/each}
-						<div class="w-fit flex ml-auto mr-auto">
-							<button type="button" on:click={removeOption} class="btn btn-secondary ml-auto mr-2"
-								>-</button
-							>
-							<button type="button" on:click={addOption} class="btn btn-secondary ml-auto mr-auto"
-								>+</button
-							>
+							<div class="divider" />
+							{#each options as option, index}
+								<Input
+									id={'option' + index.toString()}
+									value={option}
+									label={'Option ' + (index + 1)}
+									placeholder={'Option ' + (index + 1)}
+									required={true}
+								/>
+							{/each}
+							<div class="w-fit flex ml-auto mr-auto">
+								<button type="button" on:click={removeOption} class="btn btn-secondary ml-auto mr-2"
+									>-</button
+								>
+								<button type="button" on:click={addOption} class="btn btn-secondary ml-auto mr-auto"
+									>+</button
+								>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="w-full flex">
-				<div class="flex w-fit ml-auto mr-5">
-					<button
-						type="button"
-						on:click={() => {
-							showPollMultiple = false;
-							showPollType = true
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
-							<span class="h-fit mt-auto mb-auto">Zurück</span>
+				<div class="w-full flex">
+					<div class="flex w-fit ml-auto mr-5">
+						<button
+							type="button"
+							on:click={() => {
+								showPollMultiple = false;
+								showPollType = true;
+							}}
+							class="mt-5 btn btn-primary flex flex-col"
+							><span class="flex text-center btn-md"
+								><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
+								<span class="h-fit mt-auto mb-auto">Zurück</span>
 							</span>
-							</button
-					>
-					<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5">Speichern</button>
+						</button>
+						<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5"
+							>Speichern</button
+						>
+					</div>
 				</div>
-				
 			</div>
-		</div>
 		{/if}
-		
+
 		{#if showPollYesNo}
-		<!--Dieses Div ist für die Ja/Nein Page-->
-		<div class="w-full">
-			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Ja/Nein Abstimmung erstellen</h3>
-			<p class="w-fit ml-auto mr-auto">Abstimmung mit Ja/Nein Antworten oder Enthaltung</p>
-			<div class="ml-auto mr-auto w-fit">
-				<Input id="question" bind:value={question} label="Frage" placeholder="Ist PollToll toll?" required={true}/>
-			</div>
-			<div class="w-full flex">
-				<div class="flex w-fit ml-auto mr-5">
-					<button
-						type="button"
-						on:click={() => {
-							showPollYesNo = false;
-							showPollType = true
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
-							<span class="h-fit mt-auto mb-auto">Zurück</span>
+			<!--Dieses Div ist für die Ja/Nein Page-->
+			<div class="w-full">
+				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Ja/Nein Abstimmung erstellen</h3>
+				<p class="w-fit ml-auto mr-auto">Abstimmung mit Ja/Nein Antworten oder Enthaltung</p>
+				<div class="ml-auto mr-auto w-fit">
+					<Input
+						id="question"
+						bind:value={question}
+						label="Frage"
+						placeholder="Ist PollToll toll?"
+						required={true}
+					/>
+				</div>
+				<div class="w-full flex">
+					<div class="flex w-fit ml-auto mr-5">
+						<button
+							type="button"
+							on:click={() => {
+								showPollYesNo = false;
+								showPollType = true;
+							}}
+							class="mt-5 btn btn-primary flex flex-col"
+							><span class="flex text-center btn-md"
+								><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
+								<span class="h-fit mt-auto mb-auto">Zurück</span>
 							</span>
-							</button
-					>
-					<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5">Speichern</button>
+						</button>
+						<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5"
+							>Speichern</button
+						>
+					</div>
 				</div>
 			</div>
-		</div>
 		{/if}
 
 		{#if showPollRandom}
-		<!--Dieses Div ist für die freie Antwort page-->
-		<div class="w-full">
-			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
-				Abstimmung mit freier Antwort erstellen
-			</h3>
-			<p class="w-fit ml-auto mr-auto">Abstimmung, bei der man eine beliebige Antwort abgeben darf.</p>
-			<div class="ml-auto mr-auto w-fit">
-				<Input id="question" label="Frage" placeholder="Warum ist PollToll so toll?!!" required={true}/>
-			</div>
-			<div class="w-full flex">
-				<div class="flex w-fit ml-auto mr-5">
-					<button
-						type="button"
-						on:click={() => {
-							showPollRandom = false;
-							showPollType = true
-						}}
-						class="mt-5 btn btn-primary flex flex-col"
-						><span class="flex text-center btn-md"
-							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
-							<span class="h-fit mt-auto mb-auto">Zurück</span>
+			<!--Dieses Div ist für die freie Antwort page-->
+			<div class="w-full">
+				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
+					Abstimmung mit freier Antwort erstellen
+				</h3>
+				<p class="w-fit ml-auto mr-auto">
+					Abstimmung, bei der man eine beliebige Antwort abgeben darf.
+				</p>
+				<div class="ml-auto mr-auto w-fit">
+					<Input
+						id="question"
+						label="Frage"
+						placeholder="Warum ist PollToll so toll?!!"
+						required={true}
+					/>
+				</div>
+				<div class="w-full flex">
+					<div class="flex w-fit ml-auto mr-5">
+						<button
+							type="button"
+							on:click={() => {
+								showPollRandom = false;
+								showPollType = true;
+							}}
+							class="mt-5 btn btn-primary flex flex-col"
+							><span class="flex text-center btn-md"
+								><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
+								<span class="h-fit mt-auto mb-auto">Zurück</span>
 							</span>
-							</button
-					>
-					<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5">Speichern</button>
+						</button>
+						<button type="submit" class="btn btn-primary ml-auto mr-auto w-fit mt-5"
+							>Speichern</button
+						>
+					</div>
 				</div>
 			</div>
-		</div>
 		{/if}
-
 	</form>
 </div>
-
-	

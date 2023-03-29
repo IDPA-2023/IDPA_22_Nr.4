@@ -31,7 +31,7 @@
 		{placeholder}
 		{disabled}
 		{required}
-		id={id}
+		{id}
 		name={id}
 		{value}
 	/>

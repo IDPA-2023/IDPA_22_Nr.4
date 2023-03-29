@@ -1,14 +1,13 @@
 <script lang="ts">
-	import type { Question } from "$lib/types";
-	import type { PageData } from "./$types";
+	import type { Question } from '$lib/types';
+	import type { PageData } from './$types';
 
-    export let data : PageData
+	export let data: PageData;
 
-    console.log(data.pollId)
 </script>
 
 <div class="w-full mt-5 flex">
-    <a href="/polls/{data.pollId}/questions/new" class="btn btn-primary">Neue Frage hinzufügen</a>
+    <a href="/polls/{data.poll.id}/questions/new" class="btn btn-primary">Neue Frage hinzufügen</a>
 </div>
 
 <!--{#each data.questions as question}
