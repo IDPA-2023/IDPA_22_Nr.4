@@ -1,6 +1,6 @@
 import type { Option, Question } from "$lib/types";
 import { serializeNonPOJOs } from "$lib/utils";
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import type { ClientResponseError } from "pocketbase";
 import type { Actions, PageServerLoad } from "./$types";
 
@@ -37,7 +37,7 @@ export const load: PageServerLoad = async ({locals, params}) => {
 };
 
 export const actions: Actions = {
-    submitVote: async ({ locals, request }) => { 
+    submitVote: async ({ locals, request, params }) => { 
 
         let body = await request.formData();
 
@@ -64,5 +64,6 @@ export const actions: Actions = {
                 throw error(e.status, e.message);
             }
         });
+        throw redirect(303, `/polls/${params.pollId}`);
     }
 };
