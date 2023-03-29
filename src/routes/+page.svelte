@@ -5,10 +5,10 @@
 </script>
 
 <div class="flex flex-col gap-3">
-	<h1 class="text-xl font-bold">Aktuelle Abstimmungen</h1>
-	<div class="grid grid-cols-1 gap-4">
-		{#each data.polls as poll}
-			<PollCard {poll} />
-		{/each}
-	</div>
+    <h1 class="text-xl font-bold">Aktuelle Abstimmungen</h1>
+    <div class="grid grid-cols-4 gap-4">
+        {#each data.polls as poll}
+            <PollCard {poll} user={data.user} />
+        {/each}
+    </div>
 </div>

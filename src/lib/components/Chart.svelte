@@ -25,14 +25,12 @@
 					{
 						backgroundColor: `hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`,
 						data: chartValues,
-						borderRadius: 10
+						borderRadius:
+							parseFloat(getComputedStyle(document.body).getPropertyValue('--rounded-box')) * 16
 					}
 				]
 			},
 			options: {
-				layout: {
-					padding: 10
-				},
 				responsive: true,
 				plugins: {
 					legend: {
