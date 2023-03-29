@@ -16,17 +16,21 @@
 	let chartCanvas: HTMLCanvasElement;
 
 	onMount(async () => {
-		  ctx = chartCanvas.getContext('2d');
-			var chart = new chartjs(ctx?? "", {
-				type: 'bar',
-				data: {
-						labels: chartLabels,
-						datasets: [{
-								backgroundColor: `hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`,
-								data: chartValues,
-                borderRadius: parseFloat(getComputedStyle(document.body).getPropertyValue('--rounded-box')) * 16,
-						}]
-				},
+		ctx = chartCanvas.getContext('2d');
+		var chart = new chartjs(ctx ?? '', {
+			type: 'bar',
+			data: {
+				labels: chartLabels,
+				datasets: [
+					{
+						backgroundColor: `hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`,
+						data: chartValues,
+						borderRadius:
+							parseFloat(getComputedStyle(document.body).getPropertyValue('--rounded-box')) * 16
+					}
+				]
+			},
+			options: {
 				responsive: true,
 				plugins: {
 					legend: {
