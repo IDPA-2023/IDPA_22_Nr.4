@@ -16,13 +16,13 @@ interface Poll extends Record {
 	description: string;
 }
 
-interface Question extends Record { 
+interface Question extends Record {
 	id: string;
 	question: string;
 	type: "free" | "select" | "multiple" | "yesNo";
 }
 
-interface Vote extends Record { 
+interface Vote extends Record {
 	vote: string;
 }
 
