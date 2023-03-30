@@ -37,33 +37,39 @@ export const load: PageServerLoad = async ({locals, params}) => {
 };
 
 export const actions: Actions = {
-    submitVote: async ({ locals, request, params }) => { 
+    submitVote: async ({ locals, request, params }) => {
 
-        let body = await request.formData();
+        try {
+            let body = await request.formData();
+    
+            let questionIDFS = body.getAll("questionIDFS");
+            let votes = body.getAll("vote");
+    
+            votes.forEach((vote, index) => {
+                while (votes[index] === "") {
+                    votes.splice(index, 1);
+                    questionIDFS.splice(index, 1);
+                }
+            });
+    
+            votes.forEach(async (vote, index) => {
+                try {
+                    await locals.pb.collection('vote').create({
+                        "questionIDFS": questionIDFS[index] as string,
+                        "vote": vote as string,
+                        "userIDFS": locals.user?.id
+                    }, { '$autoCancel': false });
+                } catch (err) {
+                    console.log(err);
+                    const e = err as ClientResponseError;
+                    throw error(e.status, e.message);
+                }
+            });
+        } catch (err) {
+            const e = err as ClientResponseError;
+            throw error(e.status, e.message);
+        }
 
-        let questionIDFS = body.getAll("questionIDFS");
-        let votes = body.getAll("vote");
-
-        votes.forEach((vote, index) => {
-            if (vote === "") {
-                votes.splice(index, 1);
-                questionIDFS.splice(index, 1);
-            }
-        });
-
-        votes.forEach(async (vote, index) => {
-            try {
-                await locals.pb.collection('vote').create({
-                    "questionIDFS": questionIDFS[index] as string,
-                    "vote": vote as string,
-                    "userIDFS": locals.user?.id
-                }, { '$autoCancel': false });
-            } catch (err) {
-                console.log(err);
-                const e = err as ClientResponseError;
-                throw error(e.status, e.message);
-            }
-        });
         throw redirect(303, `/polls/${params.pollId}`);
     }
 };
