@@ -31,6 +31,7 @@
 		{placeholder}
 		{disabled}
 		{required}
+		{id}
 		name={id}
 		{value}
 	/>
