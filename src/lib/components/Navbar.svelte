@@ -47,6 +47,7 @@
 							Meine Abstimmungen
 						</a>
 					</li>
+					<li><a href="/my/groups">Meine Gruppen</a></li>
 					<li><a href="/my/settings">Einstellungen</a></li>
 					<li><a href="/logout">Logout</a></li>
 				</ul>

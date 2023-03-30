@@ -3,14 +3,13 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-
 </script>
 
 <div class="w-full mt-5 flex">
     <a href="/polls/{data.poll.id}/questions/new" class="btn btn-primary">Neue Frage hinzufügen</a>
 </div>
 
-<!--{#each data.questions as question}
+{#each data.questions as question}
     <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
             <h2 class="card-title">{question.question}</h2>
@@ -20,4 +19,4 @@
             </div>
         </div>
     </div>
-{/each}-->
+{/each}

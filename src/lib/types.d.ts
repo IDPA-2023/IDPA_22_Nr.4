@@ -27,6 +27,12 @@ interface Vote extends Record {
 	vote: string;
 }
 
+interface Group extends Record {
+	id: string;
+	hostIDFS: string;
+	name: string;
+}
+
 interface userGroup extends Record {
 	userIDFS: string;
 	groupIDFS: string;
