@@ -6,7 +6,7 @@
 	export let user: User | undefined;
 </script>
 
-<div class="card mx-3 sm:mx-0 sm:w-72 bg-base-100 shadow-xl w-fit max-h-96">
+<div class="card px-3 sm:mx-0 sm:w-72 bg-base-100 shadow-xl w-full max-h-96">
 	<div class="card-body">
 		<h2 class="card-title">{poll.name}</h2>
 		<p>{poll.description}</p>

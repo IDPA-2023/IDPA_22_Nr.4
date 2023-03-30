@@ -22,7 +22,10 @@ export const load: PageServerLoad = ({ locals }) => {
                     filter: `public = true || groupIDFS = '${group.groupIDFS}'`,
                 })))
             }
-            return polls;
+            return polls.filter(
+							(thing, index, self) =>
+								index === self.findIndex((t) => t.id === thing.id)
+						);
         } catch (err) { 
             const e = err as ClientResponseError;
             throw error(e.status, e.message);
