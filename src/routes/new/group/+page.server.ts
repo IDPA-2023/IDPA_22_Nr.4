@@ -49,5 +49,6 @@ export const actions : Actions = {
       } catch (err) {
         console.log(err)
       }
+      throw redirect(303, '/my/groups')
     }
 }

@@ -25,3 +25,9 @@ interface Question extends Record {
 interface Vote extends Record { 
 	vote: string;
 }
+
+interface Group extends Record {
+	id: string;
+	hostIDFS: string;
+	name: string;
+}
