@@ -16,7 +16,7 @@
 		</h2>
 		<div class="flex flex-col">
 			<input type="button" on:click={() => select("Nein")} value="Nein" class="btn btn-secondary w-full mt-2 {selected === "Nein" ? "" : "btn-outline"}" />
-			<input type="nutton" on:click={() => select("Ja")} value="Ja" class="btn btn-secondary w-full mt-2 {selected === "Ja" ? "" : "btn-outline"}" />
+			<input type="button" on:click={() => select("Ja")} value="Ja" class="btn btn-secondary w-full mt-2 {selected === "Ja" ? "" : "btn-outline"}" />
 		</div>
 	</div>
 </div>
