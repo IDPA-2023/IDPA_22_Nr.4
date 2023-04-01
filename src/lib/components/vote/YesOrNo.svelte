@@ -4,7 +4,9 @@
 	export let question: Question;
 
 	let selected: string;
-	$: selected = "";
+	const select = (value: string) => {
+		selected = value;
+	};
 </script>
 
 <div class="card w-full mt-4 bg-base-100 shadow-xl">
@@ -13,8 +15,8 @@
 			{question.question}
 		</h2>
 		<div class="flex flex-col">
-			<input type="button" on:click={() => selected = "Nein"} value="Nein" class="btn btn-secondary w-full mt-2 {selected === "Nein" ? "" : "btn-outline"}" />
-			<input type="button" on:click={() => selected = "Ja"} value="Ja" class="btn btn-secondary w-full mt-2 {selected === "Ja" ? "" : "btn-outline"}" />
+			<input type="button" on:click={() => select("Nein")} value="Nein" class="btn btn-secondary w-full mt-2 {selected === "Nein" ? "" : "btn-outline"}" />
+			<input type="nutton" on:click={() => select("Ja")} value="Ja" class="btn btn-secondary w-full mt-2 {selected === "Ja" ? "" : "btn-outline"}" />
 		</div>
 	</div>
 </div>
