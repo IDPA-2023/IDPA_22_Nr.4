@@ -1,9 +1,10 @@
 import { serializeNonPOJOs } from "$lib/utils";
 import { error, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
+import type { User, UserGroup } from "$lib/types";
 
-let users = []
-let userGroups = []
+let users : User[] = []
+let userGroups : UserGroup[] = []
 
 export const load : PageServerLoad = async ({ params, locals }) => {
     if(!locals.pb.authStore.isValid){
@@ -34,7 +35,7 @@ export const load : PageServerLoad = async ({ params, locals }) => {
 
             for(let i=0; i<userGroup.items.length; i++){
                 userGroups.push(userGroup.items[i])
-                const user = serializeNonPOJOs(await locals.pb.collection('users').getOne(userGroup.items[i].userIDFS))
+                const user = serializeNonPOJOs<User>(await locals.pb.collection('users').getOne(userGroup.items[i].userIDFS))
                 users.push(user)
             }
             return{

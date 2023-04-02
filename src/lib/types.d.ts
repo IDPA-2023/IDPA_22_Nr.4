@@ -31,3 +31,10 @@ interface Group extends Record {
 	hostIDFS: string;
 	name: string;
 }
+
+interface UserGroup extends Record {
+	id: string;
+	userIDFS: string;
+	groupIDFS: string;
+	weight: number;
+}
