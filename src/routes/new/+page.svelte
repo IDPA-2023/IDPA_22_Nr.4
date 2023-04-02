@@ -11,8 +11,8 @@
 	let showPollVariables : boolean;
 	$: pollVisibility = '';
 	$: description = '';
-	$: showPollVisibility = true
-	$: showPollVariables = false
+	$: showPollVisibility = true;
+	$: showPollVariables = false;
 
 	let error = '';
 	$: error = '';
@@ -28,9 +28,7 @@
 				<p class="w-fit ml-auto mr-auto">Wer soll an der Abstimmung teilnehmen dürfen?</p>
 				<div class="ml-auto mr-auto w-fit mt-5">
 					<div class="ml-auto mr-auto w-fit">
-						<div
-							class="w-full max-w-lg ml-auto mr-auto mb-2"
-						>
+						<div class="w-full max-w-lg ml-auto mr-auto mb-2">
 							<label for="title" class="label font-medium pb-1">
 								<span class="label-text">Titel</span>
 							</label>
@@ -43,9 +41,7 @@
 								placeholder="PollToll Abstimmung"
 							/>
 						</div>
-						<div
-							class="w-full max-w-lg ml-auto mr-auto mb-2"
-						>
+						<div class="w-full max-w-lg ml-auto mr-auto mb-2">
 							<label for="title" class="label font-medium pb-1">
 								<span class="label-text">Beschreibung</span>
 							</label>
@@ -97,21 +93,20 @@
 					</div>
 				</div>
 				<button
-				type="button"
-				on:click={() => {
-					showPollVisibility = false; showPollVariables = true;
-				}}
-				class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
-				><span class="flex text-center btn-md"
-					><span class="h-fit mt-auto mb-auto">Weiter</span>
-					<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-				></button
+					type="button"
+					on:click={() => {
+						showPollVisibility = false;
+						showPollVariables = true;
+					}}
+					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
+					><span class="flex text-center btn-md"
+						><span class="h-fit mt-auto mb-auto">Weiter</span>
+						<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
+					></button
 				>
 			</div>
 			<div class="w-full pt-5 {showPollVariables ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
-					Abstimmungsvariablen
-				</h3>
+				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsvariablen</h3>
 				<p class="w-fit ml-auto mr-auto">Weitere Einstellungen für die Abstimmung</p>
 
 				<div class="w-full flex flex-col mt-5">
@@ -124,47 +119,52 @@
 						<label for="radioEinfach" class="w-full flex mb-5">Es genügt die Mehrheit der abgegebenen Stimmen, dabei werden die Enthaltungen nicht berücksichtigt.<input type="radio" name="radioMehr" id="radioEinfach" class="radio bg-black ml-auto" value="simpleMajority" required/></label>
 					</div>
 					<div class="w-64 ml-auto mr-auto mt-5">
-						<label class="ml-auto mr-auto mt-5 w-full flex flex-col">Anfangsdatum <input type="date" name="startdate" id="startdate" required></label>
-						<label class="ml-auto mr-auto mt-2 w-full flex flex-col">Enddatum <input type="date" name="enddate" id="enddate" required></label>
+						<label class="ml-auto mr-auto mt-5 w-full flex flex-col"
+							>Anfangsdatum <input type="date" name="startdate" id="startdate" required /></label
+						>
+						<label class="ml-auto mr-auto mt-2 w-full flex flex-col"
+							>Enddatum <input type="date" name="enddate" id="enddate" required /></label
+						>
 					</div>
 				</div>
 
 				<div class="w-full flex">
 					<button
-					type="button"
-					on:click={() => {
-						showPollVisibility = true; showPollVariables = false;
-					}}
-					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
-					><span class="flex text-center btn-md"
-						><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
-						<span class="h-fit mt-auto mb-auto">Zurück</span>
-						</span
-					></button
+						type="button"
+						on:click={() => {
+							showPollVisibility = true;
+							showPollVariables = false;
+						}}
+						class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
+						><span class="flex text-center btn-md"
+							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
+							<span class="h-fit mt-auto mb-auto">Zurück</span>
+						</span></button
 					>
-					<button type="submit" class="btn btn-primary mr-auto ml-auto w-fit mt-5">Abstimmung Speichern</button
+					<button type="submit" class="btn btn-primary mr-auto ml-auto w-fit mt-5"
+						>Abstimmung Speichern</button
 					>
 				</div>
 			</div>
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			{#if error !== ''}
-			<div class="alert alert-warning shadow-lg w-fit ml-auto mr-auto mt-10">
-				<div>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="stroke-current flex-shrink-0 h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-						/></svg
-					>
-					<span>{error}</span>
+				<div class="alert alert-warning shadow-lg w-fit ml-auto mr-auto mt-10">
+					<div>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="stroke-current flex-shrink-0 h-6 w-6"
+							fill="none"
+							viewBox="0 0 24 24"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/></svg
+						>
+						<span>{error}</span>
+					</div>
 				</div>
-			</div>
 			{/if}
 		</form>
 	</div>

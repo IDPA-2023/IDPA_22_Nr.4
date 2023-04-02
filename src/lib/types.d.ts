@@ -14,15 +14,16 @@ interface Poll extends Record {
 	public: boolean;
 	requireLogin: boolean;
 	description: string;
+	hostIDFS: string;
 }
 
-interface Question extends Record { 
+interface Question extends Record {
 	id: string;
 	question: string;
-	type: "modal" | "checkbox" | "free" | "select";
+	type: "free" | "select" | "multiple" | "yesNo";
 }
 
-interface Vote extends Record { 
+interface Vote extends Record {
 	vote: string;
 }
 
@@ -37,4 +38,10 @@ interface UserGroup extends Record {
 	userIDFS: string;
 	groupIDFS: string;
 	weight: number;
+}
+
+interface Option extends Record {
+	id: string;
+	questionIDFS: string;
+	option: string;
 }
