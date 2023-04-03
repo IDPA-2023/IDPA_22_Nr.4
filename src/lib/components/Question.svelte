@@ -1,9 +1,11 @@
 <script lang="ts">
 	import type { Question, User, Vote } from '$lib/types';
-	import { Chart, Table } from '$lib/components';
+	import { Chart, PieChart, Table } from '$lib/components';
 
 	export let question: Question;
 	export let votes: Vote[];
+	export let pie: boolean = false;
+	export let groupCount: number = 0;
 
 	votes = votes.filter((vote) => {
 		return vote.questionIDFS === question.id;
@@ -16,8 +18,10 @@
 			{question.question}
 		</h3>
 	</div>
-	<div class="p-3 bg-base-200">
-		{#if question.type === 'modal' || question.type === 'select' || question.type === 'checkbox' || question.type === 'radio' || question.type === 'multiple' || question.type === 'yesNo'}
+	<div class="p-3 bg-base-200 max-h-full flex justify-center">
+		{#if pie}
+			<PieChart {votes} {groupCount} />
+		{:else if question.type === 'select' || question.type === 'multiple' || question.type === 'yesNo'}
 			<Chart {votes} />
 		{:else}
 			<Table {votes} />

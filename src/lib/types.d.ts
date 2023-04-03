@@ -15,6 +15,7 @@ interface Poll extends Record {
 	requireLogin: boolean;
 	description: string;
 	hostIDFS: string;
+	groupIDFS?: string;
 }
 
 interface Question extends Record {

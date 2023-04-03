@@ -27,7 +27,7 @@
     </div>
     {#each data.questions as question}
         <div class="mt-5 w-full">
-            <Question {question} votes={data.votes}/>
+            <Question {question} votes={data.votes} pie={data.poll.groupIDFS !== ""} groupCount={data.groupCount}/>
         </div>
     {/each}
 </div>
