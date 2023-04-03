@@ -15,6 +15,11 @@ interface Poll extends Record {
 	requireLogin: boolean;
 	description: string;
 	hostIDFS: string;
+	load: any;
+	loadExpand: any;
+	isNew: any;
+	clone: any;
+	export: any;
 }
 
 interface Question extends Record {
