@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Icon, ChevronRight, ChevronLeft } from 'svelte-hero-icons';
-	import { boolean } from 'zod';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -16,6 +15,17 @@
 
 	let error = '';
 	$: error = '';
+
+	const changePageVisibility = () => {
+		showPollVisibility = false;
+		showPollVariables = true;
+	}
+
+	const changePageVisibilityBack = () => {
+		showPollVisibility = true;
+		showPollVariables = false;
+	}
+
 </script>
 
 <div class="flex flex-col w-full h-full">
@@ -99,7 +109,7 @@
 				<button
 				type="button"
 				on:click={() => {
-					showPollVisibility = false; showPollVariables = true;
+					changePageVisibility()
 				}}
 				class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 				><span class="flex text-center btn-md"
@@ -133,7 +143,7 @@
 					<button
 					type="button"
 					on:click={() => {
-						showPollVisibility = true; showPollVariables = false;
+						changePageVisibilityBack()
 					}}
 					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 					><span class="flex text-center btn-md"
