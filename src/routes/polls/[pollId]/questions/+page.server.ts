@@ -4,19 +4,21 @@ import { serializeNonPOJOs } from "$lib/utils";
 import type { Question } from "$lib/types";
 
 export const load : PageServerLoad = ({ locals, params }) => {
+    const poll = async () => {return(await locals.pb.collection('poll').getFirstListItem(`id="${params.pollId}"`))}
     if(!locals.pb.authStore.isValid){
+        locals.pb.authStore.clear()
         throw redirect(303, '/login')
+    }
+    if(locals.user){
+        if(poll.hostIDFS !== locals.user.id){
+            locals.pb.authStore.clear()
+            throw redirect(303, '/login')
+        }
     }
 
     const getQuestions = async (pollId : string) => {
         try {
-            /*const poll = await locals.pb.collection('poll').getFirstListItem(`id="${pollId}"`)
-
-            if(locals.user){
-                if(poll.hostIDFS !== locals.user.id){
-                    throw redirect(303, '/')
-                }
-            }*/
+            const poll = await locals.pb.collection('poll').getFirstListItem(`id="${pollId}"`)
 
             const questions = serializeNonPOJOs<Question []>(await locals.pb.collection('question').getFullList({filter: `pollIDFS="${pollId}"`}))
             console.log(questions)
@@ -25,8 +27,8 @@ export const load : PageServerLoad = ({ locals, params }) => {
                 questions: questions
             }
 
-        } catch (error) {
-            
+        } catch (err) {
+            console.log(err)
         }
     }
 
