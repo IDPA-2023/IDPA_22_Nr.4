@@ -1,25 +1,29 @@
 <script lang="ts">
 	import type { User } from '$lib/types';
 	import { getImageURL } from '$lib/utils';
+	import { Icon, Plus, PlusCircle } from 'svelte-hero-icons';
 
 	export let user: User | undefined;
+	$: innerWidth = 1000;
 </script>
 
+<svelte:window bind:innerWidth />
 <div class="navbar bg-base-100 w-auto rounded-md shadow-2xl">
 	<div class="flex-1">
 		<a href="/" class="btn btn-ghost normal-case text-xl">PollToll</a>
 	</div>
 	<div class="flex-none gap-2">
-		<div class="form-control">
-			<input type="text" placeholder="Suchen" class="input input-bordered" />
-		</div>
 		{#if !user}
 			<div class="dropdown dropdown-end">
 				<a href="/login" class="btn btn-primary">Login</a>
 				<a href="/register" class="btn btn-secondary">Registrieren</a>
 			</div>
 		{:else}
-			<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
+			{#if innerWidth > 426}
+				<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
+			{:else}
+				<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus} /></a>
+			{/if}
 			<div class="dropdown dropdown-end">
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<!-- svelte-ignore a11y-label-has-associated-control -->
@@ -39,11 +43,9 @@
 					class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
 				>
 					<li>
-						<a href="/profile" class="justify-between">
-							Meine Abstimmungen
-							<span class="badge">Neu</span>
-						</a>
+						<a href="/my/polls" class="justify-between"> Meine Abstimmungen </a>
 					</li>
+					<li><a href="/my/groups">Meine Gruppen</a></li>
 					<li><a href="/my/settings">Einstellungen</a></li>
 					<li><a href="/logout">Logout</a></li>
 				</ul>

@@ -7,9 +7,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const getPoll = async (pollId: string) => {
 		try {
-			const poll = serializeNonPOJOs<Poll>(
-				await locals.pb.collection('poll').getOne(pollId)
-			);
+			const poll = serializeNonPOJOs<Poll>(await locals.pb.collection('poll').getOne(pollId));
 			return poll;
 		} catch (err) {
 			const e = err as ClientResponseError;
@@ -31,18 +29,20 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 	};
 
-	const getVotes = async (pollId: string) => { 
+	const getVotes = async (pollId: string) => {
 		try {
-			const votes = serializeNonPOJOs<Vote[]>(await locals.pb.collection('vote').getFullList({
-				expand: 'questionIDFS,userIDFS',
-				filter: `questionIDFS.pollIDFS = '${pollId}'`
-			}));
+			const votes = serializeNonPOJOs<Vote[]>(
+				await locals.pb.collection('vote').getFullList({
+					expand: 'questionIDFS,userIDFS',
+					filter: `questionIDFS.pollIDFS = '${pollId}'`
+				})
+			);
 			return votes;
 		} catch (err) {
 			const e = err as ClientResponseError;
 			throw error(e.status, e.message);
 		}
-	}
+	};
 
 	return {
 		poll: getPoll(params.pollId),
@@ -50,4 +50,3 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		votes: getVotes(params.pollId)
 	};
 };
-
