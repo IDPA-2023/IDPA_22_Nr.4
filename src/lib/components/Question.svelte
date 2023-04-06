@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="p-3 bg-base-200 max-h-full flex justify-center">
-		{#if pie}
+		{#if pie && question.type !== "free"}
 			{#if pieType === "absMajority"}
 				<Absolute {votes} {groupCount} />
 			{:else if pieType === "relMajority"}

@@ -4,6 +4,17 @@
 	export let votes: Vote[];
 
 	let users = votes.map((vote) => vote.expand.userIDFS as User);
+
+	let answers = votes.map((vote) => vote.vote);
+	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
+		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
+	}, {});
+
+	Object.entries(occurences).sort((a, b) => b[1] - a[1]);
+
+	let chartValues = Object.values(occurences);
+	let chartLabels = Object.keys(occurences);
+
 </script>
 
 <div class="overflow-x-auto">
@@ -13,19 +24,17 @@
 		</div>
 	{:else}
 		<table class="table w-full">
-			<!-- head -->
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Abgestummen</th>
+					<th>Abstimmung</th>
+					<th>Anzahl</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- row 1 -->
-				{#each votes as vote, i}
+				{#each chartLabels as vote, i}
 					<tr>
-						<td>{users[i].name}</td>
-						<td>{vote.vote}</td>
+						<td>{vote}</td>
+						<td>{chartValues[i]}</td>
 					</tr>
 				{/each}
 			</tbody>
