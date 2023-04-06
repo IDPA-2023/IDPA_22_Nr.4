@@ -2,9 +2,14 @@
 	import { page } from "$app/stores";
 	import { Question } from "$lib/components";
 	import { Icon, PencilSquare } from "svelte-hero-icons";
+	import { string } from "zod";
     import type { PageData } from "./$types";
 
     export let data: PageData;
+    let pieType: string;
+    data.variables.forEach((variable) => {
+            pieType = variable.type;     
+    }); 
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
@@ -27,7 +32,7 @@
     </div>
     {#each data.questions as question}
         <div class="mt-5 w-full">
-            <Question {question} votes={data.votes} pie={data.poll.groupIDFS !== ""} groupCount={data.groupCount}/>
+            <Question {question} votes={data.votes} pie={data.poll.groupIDFS !== ""} {pieType} groupCount={data.groupCount}/>
         </div>
     {/each}
 </div>

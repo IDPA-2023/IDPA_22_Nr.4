@@ -45,3 +45,11 @@ interface Option extends Record {
 	questionIDFS: string;
 	option: string;
 }
+
+interface Variable extends Record {
+	id: string;
+	pollIDFS: string;
+	type: "relMajority" | "absMajority" | "date" | "twothirdMajority";
+	endDate?: Date;
+	startDate?: Date;
+}

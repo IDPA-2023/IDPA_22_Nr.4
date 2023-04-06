@@ -1,4 +1,4 @@
-import type { Poll, Question, Vote, userGroup } from '$lib/types';
+import type { Poll, Question, Variable, Vote, userGroup } from '$lib/types';
 import { serializeNonPOJOs } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 import type { ClientResponseError } from 'pocketbase';
@@ -51,7 +51,21 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 				expand: 'groupIDFS',
 				filter: `groupIDFS.id = '${poll.groupIDFS}'`
 			}))
-			return group.length;
+			let count = 0;
+			group.forEach((user) => { 
+				count += user.weight;
+			})
+			return count;
+		} catch (err) {
+			const e = err as ClientResponseError;
+			throw error(e.status, e.message);
+		}
+	}
+
+	const getVariables = async (pollId: string) => { 
+		try {
+			const variable = serializeNonPOJOs<Variable[]>(await locals.pb.collection('variable').getFullList({filter: `pollIDFS = '${pollId}'`}));
+			return variable;
 		} catch (err) {
 			const e = err as ClientResponseError;
 			throw error(e.status, e.message);
@@ -62,6 +76,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		poll: getPoll(params.pollId),
 		questions: getQuestion(params.pollId),
 		votes: getVotes(params.pollId),
-		groupCount: getGroupCount(params.pollId)
+		groupCount: getGroupCount(params.pollId),
+		variables: getVariables(params.pollId),
 	};
 };
