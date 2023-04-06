@@ -23,16 +23,17 @@
 	let ctx;
 	let chartCanvas: HTMLCanvasElement;
 
-	chartValues.push(absention);
-	chartLabels.push('Enthaltung');
-
+	if (absention > 0) {
+		chartValues.push(absention);
+		chartLabels.push('Enthaltung');
+	}
 	const getColour = () => {
 		let barColor: string[] = [];
 		for (const val in chartValues) {
 			if (chartLabels[val] === 'Enthaltung') {
 				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--b1')})`);
 			} else {
-				if (chartValues[val] === Math.max(...chartValues)) {
+				if (chartValues[val]  >= (groupCount + absention) / 2) {
 					barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--p')})`);
 				} else {
 					barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`);
