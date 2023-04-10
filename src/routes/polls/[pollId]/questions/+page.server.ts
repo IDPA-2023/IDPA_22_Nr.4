@@ -2,6 +2,7 @@ import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
 import { serializeNonPOJOs } from '$lib/utils';
 import type { Question } from '$lib/types';
+import type { Actions } from '@sveltejs/kit';
 
 export const load: PageServerLoad = ({ locals, params }) => {
 	const poll = async () => {
@@ -41,3 +42,15 @@ export const load: PageServerLoad = ({ locals, params }) => {
 		pollId: params.pollId
 	};
 };
+
+export const actions : Actions = {
+	deleteQuestion:async ({ locals, request }) => {
+		const data = Object.fromEntries(await request.formData())
+
+		try {
+			const record = await locals.pb.collection('question').delete(data.id)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+}

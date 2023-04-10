@@ -44,7 +44,7 @@
 				</p>
 			</div>
 			<div slot="actions" class="flex w-full items-center justify-center space-x-2">
-				<label for={poll.id} class="btn btn-outline">Cancel</label>
+				<label for={poll.id} class="btn btn-outline">Abbrechen</label>
 				<form action="?/deleteProject" method="POST" use:enhance={submitDeleteProject}>
 					<input type="hidden" name="id" value={poll.id} />
 					<button type="submit" class="btn btn-error" disabled={loading}>Löschen</button>
