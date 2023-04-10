@@ -65,6 +65,22 @@ export const actions : Actions = {
             console.log(err)
         }
     },
+    getUserByUsername:async ({ request, locals, params }) => {
+        const data = Object.fromEntries(await request.formData())
+
+        try {
+            const user = await locals.pb.collection('users').getFirstListItem(`username="${data.username}"`)
+
+            const newRecordData = {
+                "userIDFS": user.id,
+                "groupIDFS": params.groupId,
+                "weight": 1
+            }
+            const record = await locals.pb.collection('userGroup').create(newRecordData)
+        } catch (err) {
+            console.log(err)
+        }
+    },
     editGroup:async ({ request, locals, params }) => {
         const data = Object.fromEntries(await request.formData())
 

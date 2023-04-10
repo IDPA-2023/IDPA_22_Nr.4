@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Icon, Trash } from "svelte-hero-icons";
 	import type { PageData } from "./$types";
+	import { Input } from "$lib/components";
 
     export let data : PageData
     console.log(data.userData)
@@ -19,6 +20,13 @@
     {/if}
     {#if data.userData}
     <h4 class="text-xl w-fit font-medium ml-auto mr-auto mt-12">Mitglieder</h4>
+    <form action="?/getUserByUsername" method="post" class="mt-4">
+        <h5 class="text-l w-fit font-small ml-auto mr-auto">Mitglieder hinzufügen</h5>
+        <div class="w-1/3 mr-auto ml-auto flex">
+            <Input type="text" name="username" required={true} label="Benutzername des einzuladenen Benutzers" id="username" placeholder="username1234"/>
+            <button type="submit" class="w-fit btn btn-secondary ml-px mb-2 mt-auto">+</button>
+        </div>
+    </form>
     {#each data.userData.users as user, idx}
     <div class="card w-4/5 bg-base-100 shadow-xl ml-auto mr-auto mt-5">
         <div class="card-body">
