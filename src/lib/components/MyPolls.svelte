@@ -4,9 +4,13 @@
 	import { Modal } from '$lib/components';
 	import { toast } from 'svelte-french-toast';
 	import { enhance, type SubmitFunction } from '$app/forms';
+	import { Icon, Share } from 'svelte-hero-icons';
+	import Input from './Input.svelte';
 	export let poll: Poll;
 	let modalOpen: boolean;
+	let shareModalOpen: boolean;
 	$: modalOpen = false;
+	$: shareModalOpen = false;
 	let loading = false;
 	const submitDeleteProject: SubmitFunction = () => {
 		loading = true;
@@ -33,6 +37,20 @@
 		<p>{poll.description}</p>
 	</div>
 	<div class="flex items-center justify-end w-full sm:flex-row flex-col">
+		{#if poll.require_login === true}
+		<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
+			<a href="/polls/{poll.id}/invite"><Icon src={Share}/></a>
+		</div>
+		{:else}
+		<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
+			<Modal label="share" checked={shareModalOpen}>
+				<span slot="trigger"><Icon src={Share}/></span>
+				<h3 slot="heading">Abstimmung teilen</h3>
+				<p>Hier können Sie den Link für die Abstimmung kopieren</p>
+				<Input label="Link zur Abstimmung" id="pollLink" name="pollLink" disabled={true} value={`https://polltoll.vercel.app/polls/${poll.id}/questions/vote`}/>
+			</Modal>
+		</div>
+		{/if}
 		<a href="/polls/{poll.id}/edit" class="btn btn-outline w-full sm:w-fit">Bearbeiten</a>
 		<Modal label={poll.id} checked={modalOpen}>
 			<span slot="trigger" class="btn btn-error sm:ml-2 mt-2 sm:mt-0 w-full">Löschen</span>
