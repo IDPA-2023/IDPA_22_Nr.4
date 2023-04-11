@@ -172,7 +172,7 @@
 							berücksichtigt<input
 								type="radio"
 								name="radioMehr"
-								id="radioZweiDrittel"
+								id="twothirdMajority"
 								class="radio bg-black ml-auto"
 								value="zweiDrittelMajority"
 								checked
@@ -199,7 +199,7 @@
 								name="radioMehr"
 								id="radioEinfach"
 								class="radio bg-black ml-auto"
-								value="simpleMajority"
+								value="relMajority"
 								required
 							/></label
 						>

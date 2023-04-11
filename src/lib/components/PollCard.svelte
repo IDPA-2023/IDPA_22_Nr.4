@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Poll, User } from '$lib/types';
 	import { Icon, PencilSquare } from 'svelte-hero-icons';
+	import Modal from './Modal.svelte';
 
 	export let poll: Poll;
 	export let user: User | undefined;
@@ -15,6 +16,9 @@
 			<a href={`/polls/${poll.id}/questions/vote`} class="btn btn-secondary w-full">Abstimmen</a>
 		</div>
 	</div>
+	{#if poll.public || (poll.hostIDFS === user?.id)}
+		div.w-10.p-2.rounded-full.absolute.btn-secondary.-top-3.-right-3.
+	{/if}
 	{#if poll.hostIDFS === user?.id}
 		<div class="w-10 p-2 rounded-full absolute btn-secondary -top-3 -right-3 cursor-pointer">
 			<a href={`/polls/${poll.id}/edit`}><Icon src={PencilSquare} /></a>
