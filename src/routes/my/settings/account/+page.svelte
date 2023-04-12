@@ -53,13 +53,15 @@
   
   </script>
   
-  <div class="flex flex-col w-full h-full space-y-12">
+  <div class="flex flex-col w-fit h-full space-y-12 ml-auto mr-auto">
       <div class="w-full">
           <h3 class="text-2xl font-medium">E-mail Adresse ändern</h3>
           <div class="divider">
           </div>
           <Modal label="change-email" checked={emailModalIsOpen}>
-            <span slot="trigger" class="btn btn-primary">E-mail Adresse ändern</span>
+            <div class="w-full flex" slot="trigger">
+                <span class="btn btn-primary ml-auto mr-auto">E-mail Adresse ändern</span>
+            </div>
             <h3 slot="heading">Änderung der E-mail Adresse</h3>
             <form action="?/updateEmail" method="POST" class="space-y-2">
                 <Input id="newEmail" type="email" label="Geben Sie hier Ihre neue E-mail Adresse ein" required={true} value={form?.data?.email} disabled={loading}/>
@@ -72,7 +74,9 @@
           <div class="divider"></div>
           <Input id='username' label='Benutzername' value={data?.user?.username} disabled/>
           <Modal label="change-username" checked={userNameModalIsOpen}>
-              <span slot="trigger" class="btn btn-primary">Benutzername ändern</span>
+                <div class="w-full flex" slot="trigger">
+                    <span class="btn btn-primary ml-auto mr-auto">Benutzername ändern</span>
+                </div>
               <h3 slot="heading">Änderung des Benutzernamen</h3>
               <form action="?/updateUsername" method="POST" class="space-y-2" use:enhance={submitUpdateUsername}>
                   <Input id="username" type="text" label="Geben Sie Ihren neuen Benutzernamen ein" required={true} value={form?.data?.username} disabled={loading}/>
