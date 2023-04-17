@@ -20,6 +20,7 @@
 		<h3 class="text-xl font-bold text-center">
 			{question.question}
 		</h3>
+		{#if votes.length !== 0}
 		<div class="flex flex-row justify-center gap-3 py-2">
 			<div class="badge badge-primary">
 				Angenommen
@@ -28,6 +29,7 @@
 				Abgelehnt
 			</div>	
 		</div>
+		{/if}
 	</div>
 	<div class="p-3 bg-base-200 max-h-full flex justify-center">
 		{#if pie && question.type !== "free"}
