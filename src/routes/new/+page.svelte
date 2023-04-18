@@ -6,12 +6,9 @@
 
 	let name: string = '';
 	let description: string = '';
-	let showPollVisibility: boolean;
-	let showPollVariables: boolean;
-	$: pollVisibility = '';
-	$: description = '';
-	$: showPollVisibility = true;
-	$: showPollVariables = false;
+	let pollVisibility: string = '';
+	let showPollVisibility: boolean = true;
+	let showPollVariables: boolean = false;
 
 	let error = '';
 	$: error = '';
@@ -29,9 +26,9 @@
 
 <div class="flex flex-col w-full h-full">
 	<div class="w-full">
-		<form action="?/addPoll" method="post">
-			<div class="w-full pt-10 {showPollVisibility ? 'visible' : 'invisible h-0'}">
-				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
+		{#if showPollVisibility}
+		<div class="w-full pt-10">
+			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">
 					Öffentliche oder private Abstimmung?
 				</h3>
 				<p class="w-fit ml-auto mr-auto">Wer soll an der Abstimmung teilnehmen dürfen?</p>
@@ -97,11 +94,11 @@
 												stroke-width="2"
 												d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 											/></svg
-										>
-										<span>Jedermann darf an dieser Abstimmung teilnehmen</span>
+											>
+											<span>Jedermann darf an dieser Abstimmung teilnehmen</span>
+										</div>
 									</div>
-								</div>
-							{:else if pollVisibility === 'privateLink'}
+									{:else if pollVisibility === 'privateLink'}
 								<div class="alert alert-info shadow-lg mt-5">
 									<div>
 										<svg
@@ -110,39 +107,39 @@
 											viewBox="0 0 24 24"
 											class="stroke-current flex-shrink-0 w-6 h-6"
 											><path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
 												d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 											/></svg
 										>
 										<span
 											>Alle Personen, welche Zugriff auf den Einladungslink und Code haben, können
 											an der Abstimmung teilnehmen</span
-										>
+											>
+										</div>
 									</div>
-								</div>
-							{:else if pollVisibility === 'privateUsers'}
-								<div class="alert alert-info shadow-lg mt-5">
-									<div>
-										<svg
+									{:else if pollVisibility === 'privateUsers'}
+									<div class="alert alert-info shadow-lg mt-5">
+										<div>
+											<svg
 											xmlns="http://www.w3.org/2000/svg"
 											fill="none"
 											viewBox="0 0 24 24"
 											class="stroke-current flex-shrink-0 w-6 h-6"
 											><path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 											/></svg
-										>
-										<span
+											>
+											<span
 											>Nur Personen, welche ein Benutzerkonto haben und eingeladen wurden, sei es
 											als Mitglied einer Gruppe oder individuell, dürfen an dieser Abstimmung
 											teilnehmen</span
-										>
-									</div>
+											>
+										</div>
 								</div>
 							{/if}
 						</div>
@@ -150,20 +147,21 @@
 				</div>
 				<button
 					type="button"
-					on:click={() => {
-						changePageVisibility();
-					}}
+					on:click={() => changePageVisibility()
+					}
 					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 					><span class="flex text-center btn-md"
-						><span class="buttonWeiter h-fit mt-auto mb-auto">Weiter</span>
-						<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
+					><span class="buttonWeiter h-fit mt-auto mb-auto">Weiter</span>
+					<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
 					></button
-				>
-			</div>
-			<div class="w-full pt-5 {showPollVariables ? 'visible' : 'invisible h-0'}">
+					>
+				</div>
+			{:else}
+			<form action="?/addPoll" method="post">
+			<div class="w-full pt-5">
 				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsvariablen</h3>
 				<p class="w-fit ml-auto mr-auto">Weitere Einstellungen für die Abstimmung</p>
-
+				
 				<div class="w-full flex flex-col mt-5">
 					<h4 class="font-bold ml-auto mr-auto">Erforderliche Mehrheit</h4>
 					<div class="w-80 flex flex-col mr-auto ml-auto">
@@ -251,6 +249,10 @@
 					</div>
 				</div>
 			{/if}
+			<input type="hidden" name="pollVisibility" value="{pollVisibility}" />
+			<input type="hidden" name="name" value="{name}" />
+			<input type="hidden" name="description" value="{description}" />
 		</form>
+		{/if}
 	</div>
 </div>
