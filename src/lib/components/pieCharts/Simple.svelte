@@ -11,6 +11,8 @@
 
 	let answers = votes.map((vote) => vote.vote);
 
+	answers = answers.filter((answer) => answer !== "undefined");
+
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
 	}, {});

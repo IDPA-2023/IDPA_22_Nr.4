@@ -43,8 +43,13 @@
                 <Select options={data.options} {question} />
 			{/if}
 		{/each}
-		<div class="w-full mt-4 pt-2">
-			<button type="submit" class="btn btn-primary w-full" disabled={loading}>Abstimmen</button>
-		</div>
+		{#if data.questions.length === 0}
+			<p class="text-center text-3xl">😥</p>
+			<p class="text-center text-3xl">Es sind keine Fragen vorhanden</p>
+		{:else}
+			<div class="w-full mt-4 pt-2">
+				<button type="submit" class="btn btn-primary w-full" disabled={loading}>Abstimmen</button>
+			</div>
+		{/if}
 	</form>
 </div>

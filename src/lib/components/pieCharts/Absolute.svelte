@@ -10,9 +10,11 @@
 		(vote, index, self) => index === self.findIndex((v) => v.userIDFS === vote.userIDFS)
 	);
 
-	let absention = groupCount - votes.length;
-
 	let answers = votes.map((vote) => vote.vote);
+	
+	let absention = groupCount - votes.length + answers.filter(x => x === "undefined").length;
+
+	answers = answers.filter((answer) => answer !== "undefined");
 
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;

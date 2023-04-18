@@ -35,4 +35,10 @@
             <Question {question} votes={data.votes} pie={data.poll.groupIDFS !== ""} {pieType} groupCount={data.groupCount}/>
         </div>
     {/each}
+    {#if data.questions.length === 0}
+        <div class="mt-5 w-full">
+            <p class="text-center text-3xl">😥</p>
+            <p class="text-center text-3xl">Es wurden noch keine Fragen hinzugefügt.</p>
+        </div>
+    {/if}
 </div>
