@@ -250,7 +250,7 @@
 				</div>
 			{/if}
 			<input type="hidden" name="pollVisibility" value="{pollVisibility}" />
-			<input type="hidden" name="name" value="{name}" />
+			<input type="hidden" name="title" value="{name}" />
 			<input type="hidden" name="description" value="{description}" />
 		</form>
 		{/if}
