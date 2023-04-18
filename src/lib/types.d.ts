@@ -16,12 +16,17 @@ interface Poll extends Record {
 	description: string;
 	hostIDFS: string;
 	groupIDFS?: string;
+	load: any;
+	loadExpand: any;
+	isNew: any;
+	clone: any;
+	export: any;
 }
 
 interface Question extends Record {
 	id: string;
 	question: string;
-	type: "free" | "select" | "multiple" | "yesNo";
+	type: 'free' | 'select' | 'multiple' | 'yesNo';
 }
 
 interface Vote extends Record {
@@ -34,7 +39,8 @@ interface Group extends Record {
 	name: string;
 }
 
-interface userGroup extends Record {
+interface UserGroup extends Record {
+	id: string;
 	userIDFS: string;
 	groupIDFS: string;
 	weight: number;

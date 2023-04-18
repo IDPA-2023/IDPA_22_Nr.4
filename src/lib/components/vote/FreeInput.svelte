@@ -4,7 +4,7 @@
 	export let question: Question;
 
 	let selected: string;
-	$: selected = "";
+	$: selected = '';
 </script>
 
 <div class="card w-full mt-4 bg-base-100 shadow-xl">
@@ -13,7 +13,12 @@
 			{question.question}
 		</h2>
 		<div class="flex flex-col">
-			<input type="text" bind:value={selected} placeholder="Ihre Antwort hier!" class="input input-bordered w-full mt-2" />
+			<input
+				type="text"
+				bind:value={selected}
+				placeholder="Ihre Antwort hier!"
+				class="input input-bordered w-full mt-2"
+			/>
 		</div>
 	</div>
 </div>

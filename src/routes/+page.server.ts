@@ -1,4 +1,4 @@
-import type { Poll, userGroup } from "$lib/types";
+import type { Poll, UserGroup } from "$lib/types";
 import { serializeNonPOJOs } from "$lib/utils";
 import type { ClientResponseError } from "pocketbase";
 import { error } from '@sveltejs/kit';
@@ -7,7 +7,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = ({ locals }) => {
     const getPolls = async () => {
         try {
-            const userGroup = serializeNonPOJOs<userGroup[]>(await locals.pb.collection('userGroup').getFullList({
+            const userGroup = serializeNonPOJOs<UserGroup[]>(await locals.pb.collection('userGroup').getFullList({
                 filter: `userIDFS = '${locals.user?.id}'`
             }));
             let polls: Poll[] = []
