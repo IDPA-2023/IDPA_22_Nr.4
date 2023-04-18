@@ -13,7 +13,7 @@
 					await update();
 					break;
 				case 'failure':
-					toast.error('Invalid email or password');
+					toast.error('Ungülitge Email or Password');
 					await update();
 					break;
 				case 'error':
@@ -62,7 +62,11 @@
 					errors={form?.errors?.password}
 					disabled={loading}
 				/>
-				<a href="/reset-password" class="text-primary font-medium hover:cursor-pointer hover:underline">Passowort vergessen?</a>
+				<a
+					href="/reset-password"
+					class="text-primary font-medium hover:cursor-pointer hover:underline"
+					>Passowort vergessen?</a
+				>
 				<div class="w-full max-w-md pt-2">
 					<button type="submit" class="btn btn-primary w-full" disabled={loading}>Login</button>
 				</div>
