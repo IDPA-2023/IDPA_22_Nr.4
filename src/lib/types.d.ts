@@ -38,7 +38,8 @@ interface Group extends Record {
 	name: string;
 }
 
-interface userGroup extends Record {
+interface UserGroup extends Record {
+	id: string;
 	userIDFS: string;
 	groupIDFS: string;
 	weight: number;
