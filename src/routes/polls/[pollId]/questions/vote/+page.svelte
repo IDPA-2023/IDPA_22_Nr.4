@@ -26,8 +26,7 @@
 			}
 			loading = false;
 		};
-	}
-
+	};
 </script>
 
 <div class="flex flex-col items-center h-hull w-full">
@@ -37,10 +36,10 @@
 				<YesOrNo {question} />
 			{:else if question.type === 'multiple'}
 				<MultipleChoice options={data.options} {question} />
-            {:else if question.type === 'free'}
-                <FreeInput {question} />
-            {:else if question.type === 'select'}
-                <Select options={data.options} {question} />
+			{:else if question.type === 'free'}
+				<FreeInput {question} />
+			{:else if question.type === 'select'}
+				<Select options={data.options} {question} />
 			{/if}
 		{/each}
 		<div class="w-full mt-4 pt-2">

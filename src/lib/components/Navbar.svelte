@@ -4,7 +4,7 @@
 	import { Icon, Plus, PlusCircle } from 'svelte-hero-icons';
 
 	export let user: User | undefined;
-	$: innerWidth = 1000
+	$: innerWidth = 1000;
 </script>
 
 <svelte:window bind:innerWidth />
@@ -22,7 +22,7 @@
 			{#if innerWidth > 426}
 				<a href="/new" class="btn btn-secondary btn-outline">Abstimmung erstellen</a>
 			{:else}
-				<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus}/></a>
+				<a href="/new" class="btn btn-secondary p-2 btn-circle"><Icon src={Plus} /></a>
 			{/if}
 			<div class="dropdown dropdown-end">
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -43,9 +43,7 @@
 					class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
 				>
 					<li>
-						<a href="/my/polls" class="justify-between">
-							Meine Abstimmungen
-						</a>
+						<a href="/my/polls" class="justify-between"> Meine Abstimmungen </a>
 					</li>
 					<li><a href="/my/groups">Meine Gruppen</a></li>
 					<li><a href="/my/settings">Einstellungen</a></li>

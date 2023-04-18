@@ -33,6 +33,9 @@
 </script>
 
 <div class="flex flex-col items-center h-full w-full gap-4">
+	<a href="/polls/{data.poll.id}/questions" class="btn btn-primary w-fit ml-auto"
+		>Fragen bearbeiten</a
+	>
 	<div class="card w-full max-w-fit bg-base-100 shadow-xl">
 		<div class="card-body">
 			<div class="card-title">
@@ -58,7 +61,12 @@
 				value={form?.data.description ?? data.poll.description}
 				label="Beschreibung"
 			/>
-			<input disabled={loading} type="submit" class="btn btn-primary mt-2 w-full" value="Speichern" />
+			<input
+				disabled={loading}
+				type="submit"
+				class="btn btn-primary mt-2 w-full"
+				value="Speichern"
+			/>
 		</form>
 	</div>
 </div>

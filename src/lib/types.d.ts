@@ -25,7 +25,7 @@ interface Poll extends Record {
 interface Question extends Record {
 	id: string;
 	question: string;
-	type: "free" | "select" | "multiple" | "yesNo";
+	type: 'free' | 'select' | 'multiple' | 'yesNo';
 }
 
 interface Vote extends Record {
