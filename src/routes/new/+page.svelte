@@ -155,7 +155,7 @@
 					}}
 					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 					><span class="flex text-center btn-md"
-						><span class="h-fit mt-auto mb-auto">Weiter</span>
+						><span class="buttonWeiter h-fit mt-auto mb-auto">Weiter</span>
 						<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
 					></button
 				>
