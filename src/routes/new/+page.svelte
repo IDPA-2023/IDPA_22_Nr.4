@@ -27,7 +27,7 @@
 	};
 </script>
 
-<div class="flex flex-col w-full h-full">
+<div class="flex flex-col w-full h-full overflow-scroll">
 	<div class="w-full">
 		<form action="?/addPoll" method="post">
 			<div class="w-full pt-10 {showPollVisibility ? 'visible' : 'invisible h-0'}">
@@ -175,7 +175,7 @@
 								name="radioMehr"
 								id="twothirdMajority"
 								class="radio bg-black ml-auto"
-								value="zweiDrittelMajority"
+								value="twothirdMajority"
 								checked
 								required
 							/></label
