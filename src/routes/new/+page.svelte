@@ -150,9 +150,9 @@
 				</div>
 				<button
 					type="button"
-					on:click={() => {
-						changePageVisibility();
-					}}
+					on:click={
+						changePageVisibility
+					}
 					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col buttonWeiter"
 					name="buttonWeiter"
 					><span class="flex text-center btn-md"
@@ -218,9 +218,9 @@
 				<div class="w-full flex">
 					<button
 						type="button"
-						on:click={() => {
-							changePageVisibilityBack();
-						}}
+						on:click={
+							changePageVisibilityBack
+							}
 						class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 						><span class="flex text-center btn-md"
 							><Icon src={ChevronLeft} size="32" class="mt-auto mb-auto" />
