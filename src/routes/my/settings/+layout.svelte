@@ -13,6 +13,10 @@
 		{
 			title: 'Sicherheit',
 			href: '/my/settings/security'
+		},
+		{
+			title: 'Aussehen',
+			href: '/my/settings/appearance'
 		}
 	];
 </script>
