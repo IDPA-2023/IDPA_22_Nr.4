@@ -47,13 +47,13 @@
 </script>
 
 <div class="flex flex-col w-full h-full space-y-12">
-	<div class="w-full">
-		<h3 class="text-2xl font-medium">Change Theme</h3>
+	<div class="w-fit ml-auto mr-auto">
+		<h3 class="text-2xl font-medium">Aussehen anpassen</h3>
 		<div class="divider" />
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1 z-50">
 				<li>
-					<button> Set Theme 🎨 </button>
+					<button> Design-Thema ändern 🎨 </button>
 					<ul class="p-2 bg-base-100 w-full max-h-96 overflow-y-scroll">
 						<form method="POST" use:enhance={submitUpdateTheme}>
 							{#each themes as theme}
