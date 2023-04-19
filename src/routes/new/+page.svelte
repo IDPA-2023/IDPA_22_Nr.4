@@ -24,7 +24,7 @@
 	};
 </script>
 
-<div class="flex flex-col w-full h-full overflow-scroll">
+<div class="flex flex-col w-full h-full">
 	<div class="w-full">
 		{#if showPollVisibility}
 		<div class="w-full pt-10">

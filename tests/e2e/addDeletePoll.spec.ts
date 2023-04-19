@@ -15,7 +15,7 @@ test('add and delete Poll', async ({ page }) => {
     await page.locator('input[name="description"]').click()
     await page.locator('input[name="description"]').fill('This is a test Poll')
     await page.locator('select.select').selectOption({ label: 'Öffentlich' })
-    await page.locator("[name=buttonWeiter]").click()
+    await page.getByRole('button', { name: 'Weiter' }).click();
     await page.click('input[value="twothirdMajority"]')
     await page.locator('input[name="startdate"]').click()
     await page.locator('input[name="startdate"]').fill('2023-04-18')
