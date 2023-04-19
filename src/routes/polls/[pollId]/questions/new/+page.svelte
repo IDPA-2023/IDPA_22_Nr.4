@@ -3,21 +3,17 @@
 	import { ChevronLeft, ChevronRight, Icon } from 'svelte-hero-icons';
 	import type { PageData } from './$types';
 
-	let showPollMultiple: boolean = false;
-	let showPollRandom: boolean = false;
-	let showPollYesNo: boolean = false;
-	let showPollType: boolean = true;
+  
+	let showPollMultiple : boolean = false
+	let showPollRandom : boolean = false
+	let showPollYesNo : boolean = false
+	let showPollType : boolean = true
 
-	let options: string[];
-	let question: string;
-	let pollType: string;
-	$: options = ['', ''];
-	$: question = '';
-	$: pollType = 'multiple';
+	let options: string[] = ['', '']
+	let question: string = ''
+	let pollType : string = 'multiple'
 
-	let error: string;
-
-	$: error = '';
+	let error: string = ''
 
 	const addOption = () => {
 		options[options.length] = '';

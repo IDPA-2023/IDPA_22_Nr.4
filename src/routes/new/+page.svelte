@@ -114,7 +114,7 @@
 											/></svg
 										>
 										<span
-											>Alle Personen, welche Zugriff auf den Einladungslink und Code haben, können
+											>Alle Personen, welche Zugriff auf den Einladungslink haben, können
 											an der Abstimmung teilnehmen</span
 										>
 									</div>
@@ -133,10 +133,10 @@
 												stroke-width="2"
 												d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 											/></svg
-										>
-										<span
-											>Nur Personen, welche ein Benutzerkonto haben und eingeladen wurden, sei es
-											als Mitglied einer Gruppe oder individuell, dürfen an dieser Abstimmung
+											>
+											<span
+											>Nur Personen, welche ein Benutzerkonto haben und eingeladen wurden,
+											als Mitglied einer Gruppe, dürfen an dieser Abstimmung
 											teilnehmen</span
 										>
 									</div>
