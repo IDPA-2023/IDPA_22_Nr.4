@@ -7,7 +7,7 @@
 	options = options.filter((option) => option.questionIDFS === question.id);
 
 	let selected: string[] = [];
-	options.forEach(() => selected.push(""));
+	options.forEach(() => selected.push(''));
 </script>
 
 <div class="card w-full mt-4 bg-base-100 shadow-xl">
@@ -21,10 +21,12 @@
 					<input
 						type="button"
 						value={option.option}
-						class="btn btn-secondary w-full mt-2 {selected[idx] === option.option ? "" : "btn-outline"}"
+						class="btn btn-secondary w-full mt-2 {selected[idx] === option.option
+							? ''
+							: 'btn-outline'}"
 						on:click={() => {
 							if (selected[idx] === option.option) {
-								selected[idx] = "";
+								selected[idx] = '';
 							} else {
 								selected[idx] = option.option;
 							}

@@ -9,7 +9,7 @@
 	{#if data.polls.length === 0}
 		<p class="text-center text-3xl">😥</p>
 		<p class="text-center text-3xl">Du hast noch keine Abstimmungen</p>
-		<a href="/polls/new" class="btn btn-primary max-w-md mt-4">Erstelle eine</a>
+		<a href="/new" class="btn btn-primary max-w-md mt-4">Erstelle eine</a>
 	{:else}
 		{#each data.polls as poll}
 			<MyPolls {poll} />

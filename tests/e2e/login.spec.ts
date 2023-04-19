@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { element } from 'svelte/internal';
 
 test('login test', async ({ page }) => {
 	await page.goto('/');
@@ -11,3 +12,4 @@ test('login test', async ({ page }) => {
 	await page.waitForURL('/');
 	expect(page.getByRole('img', { name: 'avatar' })).toBeVisible();
 });
+

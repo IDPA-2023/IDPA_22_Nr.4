@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { Vote } from '$lib/types';
-	import chartjs from 'chart.js/auto';
+	import chartjs, { elements } from 'chart.js/auto';
 	let chartData;
 	import { onMount } from 'svelte';
 	export let votes: Vote[];
 	let answers = votes.map((vote) => vote.vote);
+
+	answers = answers.filter((answer) => answer !== "undefined");
 
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
@@ -15,6 +17,18 @@
 	let ctx;
 	let chartCanvas: HTMLCanvasElement;
 
+	const getColour = () => {
+		let barColor: string[] = []
+		for (const val in chartValues) {
+			if (chartValues[val] === (Math.max(...chartValues))) {
+				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--p')})`)
+			} else {
+				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`)
+			}
+		}
+		return barColor;
+	}
+
 	onMount(async () => {
 		ctx = chartCanvas.getContext('2d');
 		var chart = new chartjs(ctx ?? '', {
@@ -23,7 +37,7 @@
 				labels: chartLabels,
 				datasets: [
 					{
-						backgroundColor: `hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`,
+						backgroundColor: getColour(),
 						data: chartValues,
 						borderRadius:
 							parseFloat(getComputedStyle(document.body).getPropertyValue('--rounded-box')) * 16
@@ -53,6 +67,11 @@
 						ticks: {
 							precision: 0
 						}
+					}
+				},
+				elements: {
+					bar: {
+						borderRadius: 0
 					}
 				}
 			}

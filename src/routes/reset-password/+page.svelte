@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { ActionData } from "./$types";
+	import type { ActionData } from './$types';
 
-
-    export let form : ActionData
+	export let form: ActionData;
 </script>
 
 <div class="flex flex-col items-center h-full w-full">
