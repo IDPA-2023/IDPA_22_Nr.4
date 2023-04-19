@@ -44,6 +44,7 @@ export const actions: Actions = {
 					const record = await locals.pb.collection('poll').create(sendData);
 					pollId = record.id;
 				} catch (err) {
+					console.log(err)
 					throw error((err as ClientResponseError).status, (err as ClientResponseError).message);
 				}
 
@@ -54,6 +55,8 @@ export const actions: Actions = {
 					};
 
 					const variable1 = await locals.pb.collection('variable').create(variableData);
+
+					console.log(variableData)
 
 					const variableData2 = {
 						"pollIDFS": pollId,
@@ -66,6 +69,7 @@ export const actions: Actions = {
 
 					const variable2 = await locals.pb.collection('variable').create(variableData2);
 				} catch (err) {
+					console.log(err)
 					throw error((err as ClientResponseError).status, (err as ClientResponseError).message);
 				}
 			} else {

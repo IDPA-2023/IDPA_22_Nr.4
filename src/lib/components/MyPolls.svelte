@@ -53,7 +53,7 @@
 		{/if}
 		<a href="/polls/{poll.id}/edit" class="btn btn-outline w-full sm:w-fit">Bearbeiten</a>
 		<Modal label={poll.id} checked={modalOpen}>
-			<span slot="trigger" class="btn btn-error sm:ml-2 mt-2 sm:mt-0 w-full">Löschen</span>
+			<span slot="trigger" class="btn btn-error sm:ml-2 mt-2 sm:mt-0 w-full delete-span">Löschen</span>
 			<div slot="heading">
 				<h3 class="text-2xl">Lösche {poll.name}</h3>
 				<p class="text-base font-normal mt-2">
@@ -65,7 +65,7 @@
 				<label for={poll.id} class="btn btn-outline">Abbrechen</label>
 				<form action="?/deleteProject" method="POST" use:enhance={submitDeleteProject}>
 					<input type="hidden" name="id" value={poll.id} />
-					<button type="submit" class="btn btn-error" disabled={loading}>Löschen</button>
+					<button type="submit" class="btn btn-error delete-btn" disabled={loading}>Löschen</button>
 				</form>
 			</div>
 		</Modal>
