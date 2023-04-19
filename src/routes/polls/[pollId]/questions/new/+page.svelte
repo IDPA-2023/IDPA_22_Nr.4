@@ -4,15 +4,10 @@
 	import type { PageData } from "./$types";
 
 
-	let showPollMultiple : boolean
-	let showPollRandom : boolean
-	let showPollYesNo : boolean
-	let showPollType : boolean
-
-	$:showPollMultiple = false
-	$:showPollRandom = false
-	$:showPollYesNo = false 
-	$: showPollType = true
+	let showPollMultiple : boolean = false;
+	let showPollRandom : boolean = false;
+	let showPollYesNo : boolean = false;
+	let showPollType : boolean = true;
 
 	let options: string[];
 	let question: string;
@@ -57,7 +52,8 @@
 </script>
 <div class="w-full">
 	<form action="?/addQuestion" method="post" class="flex flex-col">
-		<div class="w-full {showPollType ? 'visible' : 'invisible h-0'}">
+		{#if showPollType === true}
+		<div class="w-full">
 			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsart auswählen</h3>
 			<p class="w-fit ml-auto mr-auto">Welche Art von Abstimmung soll es werden?</p>
 			<div class="ml-auto mr-auto w-fit mt-5">
@@ -102,7 +98,11 @@
 			<button
 				type="button"
 				on:click={() => {
-					pollType !== '' ? changePageType() : (error = 'Bitte wählen Sie eine Option aus');
+					if (pollType === '') {
+						error = 'Bitte wählen Sie eine Abstimmungsart aus';
+					} else {
+						changePageType();
+					}
 				}}
 				class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
 				><span class="flex text-center btn-md"
@@ -111,6 +111,7 @@
 				></button
 			>
 		</div>
+		{/if}
 		
 		<!--Ab hier kommen die Divs für die Erstellung der Fragen und Optionen-->
 		<!--Dieses Div ist für die Multiple Choice Page-->

@@ -46,7 +46,7 @@
 			<Modal label="share" checked={shareModalOpen}>
 				<span slot="trigger"><Icon src={Share}/></span>
 				<h3 slot="heading">Abstimmung teilen</h3>
-				<p>Hier können Sie den Link für die Abstimmung kopieren</p>
+				<p class="text-primary-content">Hier können Sie den Link für die Abstimmung kopieren</p>
 				<Input label="Link zur Abstimmung" id="pollLink" name="pollLink" disabled={true} value={`https://polltoll.vercel.app/polls/${poll.id}/questions/vote`}/>
 			</Modal>
 		</div>
