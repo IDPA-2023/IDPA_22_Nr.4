@@ -55,7 +55,7 @@ interface Option extends Record {
 interface Variable extends Record {
 	id: string;
 	pollIDFS: string;
-	type: "relMajority" | "absMajority" | "date" | "twothirdMajority";
+	type: 'relMajority' | 'absMajority' | 'date' | 'twothirdMajority';
 	endDate?: Date;
 	startDate?: Date;
 }

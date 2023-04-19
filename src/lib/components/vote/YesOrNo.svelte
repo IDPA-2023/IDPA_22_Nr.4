@@ -4,10 +4,13 @@
 	export let question: Question;
 
 	let selected: string;
-	$: selected = "";
+	$: selected = '';
 
 	function select(e: MouseEvent) {
-		selected = selected === (e.target as HTMLInputElement)?.value ? "" : (e.target as HTMLInputElement)?.value;
+		selected =
+			selected === (e.target as HTMLInputElement)?.value
+				? ''
+				: (e.target as HTMLInputElement)?.value;
 	}
 </script>
 
@@ -17,8 +20,18 @@
 			{question.question}
 		</h2>
 		<div class="flex flex-col">
-			<input type="button" on:click={select} value="Nein" class="btn btn-secondary w-full mt-2 {selected === "Nein" ? "" : "btn-outline"}" />
-			<input type="button" on:click={select} value="Ja" class="btn btn-secondary w-full mt-2 {selected === "Ja" ? "" : "btn-outline"}" />
+			<input
+				type="button"
+				on:click={select}
+				value="Nein"
+				class="btn btn-secondary w-full mt-2 {selected === 'Nein' ? '' : 'btn-outline'}"
+			/>
+			<input
+				type="button"
+				on:click={select}
+				value="Ja"
+				class="btn btn-secondary w-full mt-2 {selected === 'Ja' ? '' : 'btn-outline'}"
+			/>
 		</div>
 	</div>
 </div>

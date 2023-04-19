@@ -44,39 +44,45 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		}
 	};
 
-	const getGroupCount = async (pollId: string) => { 
+	const getGroupCount = async (pollId: string) => {
 		try {
-			const poll = serializeNonPOJOs<Poll>(await locals.pb.collection('poll').getOne(pollId, { '$autoCancel': false }));
-			const group = serializeNonPOJOs<userGroup[]>(await locals.pb.collection('userGroup').getFullList({
-				expand: 'groupIDFS',
-				filter: `groupIDFS.id = '${poll.groupIDFS}'`
-			}))
+			const poll = serializeNonPOJOs<Poll>(
+				await locals.pb.collection('poll').getOne(pollId, { $autoCancel: false })
+			);
+			const group = serializeNonPOJOs<userGroup[]>(
+				await locals.pb.collection('userGroup').getFullList({
+					expand: 'groupIDFS',
+					filter: `groupIDFS.id = '${poll.groupIDFS}'`
+				})
+			);
 			let count = 0;
-			group.forEach((user) => { 
+			group.forEach((user) => {
 				count += user.weight;
-			})
+			});
 			return count;
 		} catch (err) {
 			const e = err as ClientResponseError;
 			throw error(e.status, e.message);
 		}
-	}
+	};
 
-	const getVariables = async (pollId: string) => { 
+	const getVariables = async (pollId: string) => {
 		try {
-			const variable = serializeNonPOJOs<Variable[]>(await locals.pb.collection('variable').getFullList({filter: `pollIDFS = '${pollId}'`}));
+			const variable = serializeNonPOJOs<Variable[]>(
+				await locals.pb.collection('variable').getFullList({ filter: `pollIDFS = '${pollId}'` })
+			);
 			return variable;
 		} catch (err) {
 			const e = err as ClientResponseError;
 			throw error(e.status, e.message);
 		}
-	}
+	};
 
 	return {
 		poll: getPoll(params.pollId),
 		questions: getQuestion(params.pollId),
 		votes: getVotes(params.pollId),
 		groupCount: getGroupCount(params.pollId),
-		variables: getVariables(params.pollId),
+		variables: getVariables(params.pollId)
 	};
 };

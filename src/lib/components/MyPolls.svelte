@@ -38,22 +38,30 @@
 	</div>
 	<div class="flex items-center justify-end w-full sm:flex-row flex-col">
 		{#if poll.require_login === true}
-		<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
-			<a href="/polls/{poll.id}/invite"><Icon src={Share}/></a>
-		</div>
+			<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
+				<a href="/polls/{poll.id}/invite"><Icon src={Share} /></a>
+			</div>
 		{:else}
-		<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
-			<Modal label="share" checked={shareModalOpen}>
-				<span slot="trigger"><Icon src={Share}/></span>
-				<h3 slot="heading">Abstimmung teilen</h3>
-				<p>Hier können Sie den Link für die Abstimmung kopieren</p>
-				<Input label="Link zur Abstimmung" id="pollLink" name="pollLink" disabled={true} value={`https://polltoll.vercel.app/polls/${poll.id}/questions/vote`}/>
-			</Modal>
-		</div>
+			<div class="w-10 p-2 rounded-full mr-2 btn-secondary cursor-pointer">
+				<Modal label="share" checked={shareModalOpen}>
+					<span slot="trigger"><Icon src={Share} /></span>
+					<h3 slot="heading">Abstimmung teilen</h3>
+					<p>Hier können Sie den Link für die Abstimmung kopieren</p>
+					<Input
+						label="Link zur Abstimmung"
+						id="pollLink"
+						name="pollLink"
+						disabled={true}
+						value={`https://polltoll.vercel.app/polls/${poll.id}/questions/vote`}
+					/>
+				</Modal>
+			</div>
 		{/if}
 		<a href="/polls/{poll.id}/edit" class="btn btn-outline w-full sm:w-fit">Bearbeiten</a>
 		<Modal label={poll.id} checked={modalOpen}>
-			<span slot="trigger" class="btn btn-error sm:ml-2 mt-2 sm:mt-0 w-full delete-span">Löschen</span>
+			<span slot="trigger" class="btn btn-error sm:ml-2 mt-2 sm:mt-0 w-full delete-span"
+				>Löschen</span
+			>
 			<div slot="heading">
 				<h3 class="text-2xl">Lösche {poll.name}</h3>
 				<p class="text-base font-normal mt-2">
