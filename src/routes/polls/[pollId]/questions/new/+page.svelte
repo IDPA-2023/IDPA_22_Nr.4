@@ -3,15 +3,10 @@
 	import { ChevronLeft, ChevronRight, Icon } from 'svelte-hero-icons';
 	import type { PageData } from './$types';
 
-	let showPollMultiple: boolean;
-	let showPollRandom: boolean;
-	let showPollYesNo: boolean;
-	let showPollType: boolean;
-
-	$: showPollMultiple = false;
-	$: showPollRandom = false;
-	$: showPollYesNo = false;
-	$: showPollType = true;
+	let showPollMultiple: boolean = false;
+	let showPollRandom: boolean = false;
+	let showPollYesNo: boolean = false;
+	let showPollType: boolean = true;
 
 	let options: string[];
 	let question: string;
@@ -56,112 +51,119 @@
 
 <div class="w-full">
 	<form action="?/addQuestion" method="post" class="flex flex-col">
-		<div class="w-full {showPollType ? 'visible' : 'invisible h-0'}">
-			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsart auswählen</h3>
-			<p class="w-fit ml-auto mr-auto">Welche Art von Abstimmung soll es werden?</p>
-			<div class="ml-auto mr-auto w-fit mt-5">
-				<select
-					class="select select-primary w-full ml-auto mr-auto"
-					bind:value={pollType}
-					on:change={() => console.log(pollType)}
-				>
-					<option disabled selected value="">Abstimmungstyp (Multiple Choice, Ja/ Nein, ...)</option
+		{#if showPollType === true}
+			<div class="w-full">
+				<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsart auswählen</h3>
+				<p class="w-fit ml-auto mr-auto">Welche Art von Abstimmung soll es werden?</p>
+				<div class="ml-auto mr-auto w-fit mt-5">
+					<select
+						class="select select-primary w-full ml-auto mr-auto"
+						bind:value={pollType}
+						on:change={() => console.log(pollType)}
 					>
-					<option value="multiple">Multiple Choice</option>
-					<option value="select">Select</option>
-					<option value="yesNo">Ja/ Nein</option>
-					<option value="random">Freie Antwort</option>
-				</select>
-				<input type="hidden" name="pollType" id="pollType" value={pollType} />
-				{#if pollType === 'multiple'}
-					<div class="alert alert-info shadow-lg mt-5 max-w-md">
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								class="stroke-current flex-shrink-0 w-6 h-6"
-								><path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/></svg
-							>
-							<span>Eine oder mehrere Optionen dürfen ausgewählt werden.</span>
+						<option disabled selected value=""
+							>Abstimmungstyp (Multiple Choice, Ja/ Nein, ...)</option
+						>
+						<option value="multiple">Multiple Choice</option>
+						<option value="select">Select</option>
+						<option value="yesNo">Ja/ Nein</option>
+						<option value="random">Freie Antwort</option>
+					</select>
+					<input type="hidden" name="pollType" id="pollType" value={pollType} />
+					{#if pollType === 'multiple'}
+						<div class="alert alert-info shadow-lg mt-5 max-w-md">
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="stroke-current flex-shrink-0 w-6 h-6"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/></svg
+								>
+								<span>Eine oder mehrere Optionen dürfen ausgewählt werden.</span>
+							</div>
 						</div>
-					</div>
-				{:else if pollType === 'select'}
-					<div class="alert alert-info shadow-lg mt-5 max-w-md">
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								class="stroke-current flex-shrink-0 w-6 h-6"
-								><path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/></svg
-							>
-							<span>Eine von mehreren Optionen darf ausgewählt werden.</span>
+					{:else if pollType === 'select'}
+						<div class="alert alert-info shadow-lg mt-5 max-w-md">
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="stroke-current flex-shrink-0 w-6 h-6"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/></svg
+								>
+								<span>Eine von mehreren Optionen darf ausgewählt werden.</span>
+							</div>
 						</div>
-					</div>
-				{:else if pollType === 'random'}
-					<div class="alert alert-info shadow-lg mt-5 max-w-md">
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								class="stroke-current flex-shrink-0 w-6 h-6"
-								><path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/></svg
-							>
-							<span>Eine Freie Antwort kann eingegeben werden.</span>
+					{:else if pollType === 'random'}
+						<div class="alert alert-info shadow-lg mt-5 max-w-md">
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="stroke-current flex-shrink-0 w-6 h-6"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/></svg
+								>
+								<span>Eine Freie Antwort kann eingegeben werden.</span>
+							</div>
 						</div>
-					</div>
-				{:else if pollType === 'yesNo'}
-					<div class="alert alert-info shadow-lg mt-5 max-w-md">
-						<div>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								class="stroke-current flex-shrink-0 w-6 h-6"
-								><path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-								/></svg
-							>
-							<span
-								>Es dürfen lediglich die Optionen Ja und Nein gewählt werden. Wenn nichts ausgewählt
-								wird, dann zählt es als eine Enthaltung.</span
-							>
+					{:else if pollType === 'yesNo'}
+						<div class="alert alert-info shadow-lg mt-5 max-w-md">
+							<div>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									class="stroke-current flex-shrink-0 w-6 h-6"
+									><path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+									/></svg
+								>
+								<span
+									>Es dürfen lediglich die Optionen Ja und Nein gewählt werden. Wenn nichts
+									ausgewählt wird, dann zählt es als eine Enthaltung.</span
+								>
+							</div>
 						</div>
-					</div>
-				{/if}
+					{/if}
+				</div>
+				<button
+					type="button"
+					on:click={() => {
+						if (pollType === '') {
+							error = 'Bitte wählen Sie eine Abstimmungsart aus';
+						} else {
+							changePageType();
+						}
+					}}
+					class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
+					><span class="flex text-center btn-md"
+						><span class="h-fit mt-auto mb-auto">Weiter</span>
+						<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
+					></button
+				>
 			</div>
-			<button
-				type="button"
-				on:click={() => {
-					pollType !== '' ? changePageType() : (error = 'Bitte wählen Sie eine Option aus');
-				}}
-				class=" ml-auto mr-auto mt-5 btn btn-primary flex flex-col"
-				><span class="flex text-center btn-md"
-					><span class="h-fit mt-auto mb-auto">Weiter</span>
-					<Icon src={ChevronRight} size="32" class="mt-auto mb-auto" /></span
-				></button
-			>
-		</div>
+		{/if}
 
 		<!--Ab hier kommen die Divs für die Erstellung der Fragen und Optionen-->
 		<!--Dieses Div ist für die Multiple Choice Page-->
