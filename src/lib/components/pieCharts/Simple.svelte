@@ -3,7 +3,12 @@
 	import chartjs, { elements } from 'chart.js/auto';
 	let chartData;
 	import { onMount } from 'svelte';
+	import ChartDataLabels from 'chartjs-plugin-datalabels';
 	export let votes: Vote[];
+	votes = votes.filter(
+		(vote, index, self) => index === self.findIndex((v) => v.userIDFS === vote.userIDFS)
+	);
+
 	let answers = votes.map((vote) => vote.vote);
 
 	answers = answers.filter((answer) => answer !== 'undefined');
@@ -16,6 +21,7 @@
 	let chartLabels = Object.keys(occurences);
 	let ctx;
 	let chartCanvas: HTMLCanvasElement;
+	let voteCount = chartValues.reduce((a, b) => a + b, 0);
 
 	const getColour = () => {
 		let barColor: string[] = [];
@@ -32,46 +38,50 @@
 	onMount(async () => {
 		ctx = chartCanvas.getContext('2d');
 		var chart = new chartjs(ctx ?? '', {
-			type: 'bar',
+			type: 'pie',
 			data: {
 				labels: chartLabels,
 				datasets: [
 					{
 						backgroundColor: getColour(),
-						data: chartValues,
-						borderRadius:
-							parseFloat(getComputedStyle(document.body).getPropertyValue('--rounded-box')) * 16
+						data: chartValues
 					}
 				]
 			},
+			plugins: [ChartDataLabels],
 			options: {
 				responsive: true,
 				plugins: {
+					tooltip: {
+						enabled: false
+					},
 					legend: {
 						display: false
 					},
-					tooltip: {
-						enabled: false
-					}
-				},
-				scales: {
-					x: {
-						grid: {
-							display: false
-						}
-					},
-					y: {
-						grid: {
-							display: false
+					datalabels: {
+						color: `hsl(${getComputedStyle(document.body).getPropertyValue('--bc')})`,
+						labels: {
+							title: {
+								font: function (context) {
+									var width = context.chart.width;
+									var size = Math.round(width / 32);
+
+									return {
+										weight: 'bold',
+										size: size
+									};
+								},
+								textAlign: 'center'
+							}
 						},
-						ticks: {
-							precision: 0
+						formatter: function (value, context) {
+							if (context.chart.data.labels) {
+								return [
+									context.chart.data.labels[context.dataIndex],
+									Math.round((value / voteCount) * 100) + '%'
+								];
+							}
 						}
-					}
-				},
-				elements: {
-					bar: {
-						borderRadius: 0
 					}
 				}
 			}
@@ -84,5 +94,5 @@
 		<p class="text-xl">Noch keine Abstimmungen 😥</p>
 	</div>
 {:else}
-	<canvas bind:this={chartCanvas} id="myChart" />
+	<canvas bind:this={chartCanvas} class="" id="myChart" />
 {/if}

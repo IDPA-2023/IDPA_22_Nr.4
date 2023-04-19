@@ -15,6 +15,7 @@ interface Poll extends Record {
 	requireLogin: boolean;
 	description: string;
 	hostIDFS: string;
+	groupIDFS?: string;
 	load: any;
 	loadExpand: any;
 	isNew: any;
@@ -49,4 +50,12 @@ interface Option extends Record {
 	id: string;
 	questionIDFS: string;
 	option: string;
+}
+
+interface Variable extends Record {
+	id: string;
+	pollIDFS: string;
+	type: 'relMajority' | 'absMajority' | 'date' | 'twothirdMajority';
+	endDate?: Date;
+	startDate?: Date;
 }
