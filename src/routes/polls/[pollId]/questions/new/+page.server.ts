@@ -75,6 +75,7 @@ export const actions: Actions = {
 				throw error(404, 'Similar question already exists');
 			}
 		} catch (err) {
+			console.log(err)
 			throw error((err as ClientResponseError).status, (err as ClientResponseError).message);
 		}
 		throw redirect(303, `/polls/${params.pollId}/questions`);

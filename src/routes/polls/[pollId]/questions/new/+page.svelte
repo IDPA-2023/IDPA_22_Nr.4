@@ -4,26 +4,17 @@
 	import type { PageData } from "./$types";
 
 
-	let showPollMultiple : boolean
-	let showPollRandom : boolean
-	let showPollYesNo : boolean
-	let showPollType : boolean
+	let showPollMultiple : boolean = false
+	let showPollRandom : boolean = false
+	let showPollYesNo : boolean = false
+	let showPollType : boolean = true
 
-	$:showPollMultiple = false
-	$:showPollRandom = false
-	$:showPollYesNo = false 
-	$: showPollType = true
+	let options: string[] = ['', '']
+	let question: string = ''
+	let pollType : string = 'multiple'
 
-	let options: string[];
-	let question: string;
-	let pollType : string;
-	$: options = ['', ''];
-	$: question = '';
-	$: pollType = 'multiple'
+	let error: string = ''
 
-	let error: string;
-
-	$: error = '';
 
 	const addOption = () => {
 		options[options.length] = '';
