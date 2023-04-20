@@ -3,8 +3,7 @@
 
 	export let question: Question;
 
-	let selected: string;
-	$: selected = "";
+	let selected: string = ""
 
 	function select(e: MouseEvent) {
 		selected = selected === (e.target as HTMLInputElement)?.value ? "" : (e.target as HTMLInputElement)?.value;
