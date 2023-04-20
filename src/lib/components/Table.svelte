@@ -14,7 +14,6 @@
 
 	let chartValues = Object.values(occurences);
 	let chartLabels = Object.keys(occurences);
-
 </script>
 
 <div class="overflow-x-auto">

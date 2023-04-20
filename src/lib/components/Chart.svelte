@@ -6,7 +6,7 @@
 	export let votes: Vote[];
 	let answers = votes.map((vote) => vote.vote);
 
-	answers = answers.filter((answer) => answer !== "undefined");
+	answers = answers.filter((answer) => answer !== 'undefined');
 
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
@@ -18,16 +18,16 @@
 	let chartCanvas: HTMLCanvasElement;
 
 	const getColour = () => {
-		let barColor: string[] = []
+		let barColor: string[] = [];
 		for (const val in chartValues) {
-			if (chartValues[val] === (Math.max(...chartValues))) {
-				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--p')})`)
+			if (chartValues[val] === Math.max(...chartValues)) {
+				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--p')})`);
 			} else {
-				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`)
+				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`);
 			}
 		}
 		return barColor;
-	}
+	};
 
 	onMount(async () => {
 		ctx = chartCanvas.getContext('2d');

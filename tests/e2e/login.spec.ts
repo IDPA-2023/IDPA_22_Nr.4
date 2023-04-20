@@ -12,4 +12,3 @@ test('login test', async ({ page }) => {
 	await page.waitForURL('/');
 	expect(page.getByRole('img', { name: 'avatar' })).toBeVisible();
 });
-
