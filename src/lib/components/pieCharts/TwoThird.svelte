@@ -11,10 +11,10 @@
 	);
 
 	let answers = votes.map((vote) => vote.vote);
-	
-	let absention = groupCount - votes.length + answers.filter(x => x === "undefined").length;
 
-	answers = answers.filter((answer) => answer !== "undefined");
+	let absention = groupCount - votes.length + answers.filter((x) => x === 'undefined').length;
+
+	answers = answers.filter((answer) => answer !== 'undefined');
 
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
@@ -35,7 +35,7 @@
 			if (chartLabels[val] === 'Enthaltung') {
 				barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--b1')})`);
 			} else {
-				if (chartValues[val]  >= ((groupCount + absention) / 3) * 2) {
+				if (chartValues[val] >= ((groupCount + absention) / 3) * 2) {
 					barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--p')})`);
 				} else {
 					barColor.push(`hsl(${getComputedStyle(document.body).getPropertyValue('--s')})`);
@@ -78,15 +78,18 @@
 
 									return {
 										weight: 'bold',
-										size: size,
+										size: size
 									};
 								},
-								textAlign: 'center',
-							},
+								textAlign: 'center'
+							}
 						},
 						formatter: function (value, context) {
 							if (context.chart.data.labels) {
-								return [context.chart.data.labels[context.dataIndex], Math.round(value/groupCount*100) + '%'];
+								return [
+									context.chart.data.labels[context.dataIndex],
+									Math.round((value / groupCount) * 100) + '%'
+								];
 							}
 						}
 					}

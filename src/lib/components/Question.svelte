@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Question, Vote } from '$lib/types';
 	import { Chart, Table } from '$lib/components';
-	import {Simple, Absolute, TwoThird} from '$lib/components/pieCharts';
+	import { Simple, Absolute, TwoThird } from '$lib/components/pieCharts';
 
 	export let question: Question;
 	export let votes: Vote[];
@@ -12,7 +12,7 @@
 	votes = votes.filter((vote) => {
 		return vote.questionIDFS === question.id;
 	});
-	console.log(pieType)
+	console.log(pieType);
 </script>
 
 <div class="mockup-window border-base-100 bg-base-300">
@@ -21,24 +21,20 @@
 			{question.question}
 		</h3>
 		{#if votes.length !== 0}
-		<div class="flex flex-row justify-center gap-3 py-2">
-			<div class="badge badge-primary">
-				Angenommen
+			<div class="flex flex-row justify-center gap-3 py-2">
+				<div class="badge badge-primary">Angenommen</div>
+				<div class="badge badge-secondary">Abgelehnt</div>
 			</div>
-			<div class="badge badge-secondary">
-				Abgelehnt
-			</div>	
-		</div>
 		{/if}
 	</div>
 	<div class="p-3 bg-base-200 max-h-full flex justify-center">
-		{#if pie && question.type !== "free"}
-			{#if pieType === "absMajority"}
+		{#if pie && question.type !== 'free'}
+			{#if pieType === 'absMajority'}
 				<Absolute {votes} {groupCount} />
-			{:else if pieType === "relMajority"}
+			{:else if pieType === 'relMajority'}
 				<Simple {votes} />
-			{:else if pieType === "twothirdMajority"}
-				<TwoThird {votes} {groupCount}/>
+			{:else if pieType === 'twothirdMajority'}
+				<TwoThird {votes} {groupCount} />
 			{:else}
 				<Chart {votes} />
 			{/if}

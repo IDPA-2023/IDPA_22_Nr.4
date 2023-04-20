@@ -11,7 +11,7 @@
 
 	let answers = votes.map((vote) => vote.vote);
 
-	answers = answers.filter((answer) => answer !== "undefined");
+	answers = answers.filter((answer) => answer !== 'undefined');
 
 	const occurences = answers.reduce((acc: { [key: string]: number }, curr) => {
 		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
@@ -68,15 +68,18 @@
 
 									return {
 										weight: 'bold',
-										size: size,
+										size: size
 									};
 								},
-								textAlign: 'center',
-							},
+								textAlign: 'center'
+							}
 						},
 						formatter: function (value, context) {
 							if (context.chart.data.labels) {
-								return [context.chart.data.labels[context.dataIndex], Math.round(value/voteCount*100) + '%'];
+								return [
+									context.chart.data.labels[context.dataIndex],
+									Math.round((value / voteCount) * 100) + '%'
+								];
 							}
 						}
 					}
