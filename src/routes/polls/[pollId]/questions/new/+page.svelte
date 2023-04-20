@@ -9,6 +9,7 @@
 	let showPollYesNo : boolean = false
 	let showPollType : boolean = true
 
+
 	let options: string[] = ['', '']
 	let question: string = ''
 	let pollType : string = 'multiple'

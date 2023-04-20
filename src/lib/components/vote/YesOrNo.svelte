@@ -2,9 +2,8 @@
 	import type { Question } from '$lib/types';
 
 	export let question: Question;
-
-	let selected: string;
-	$: selected = '';
+  
+	let selected: string = ""
 
 	function select(e: MouseEvent) {
 		selected =
