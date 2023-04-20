@@ -19,6 +19,7 @@ export const actions: Actions = {
 				.collection('question')
 				.getList(1, 50, { filter: `pollIDFS="${params.pollId}"` });
 			let foundSimilar = false;
+			console.log(data.pollType)
 
 			similarQuestions.items.forEach((item) => {
 				if (item.question === data.question) {
@@ -43,7 +44,23 @@ export const actions: Actions = {
 							isOption = false;
 						}
 					}
-				} else if (data.pollType === 'random') {
+				}else if (data.pollType === 'select') {
+					type = 'select';
+					let indexOptions = 0;
+					let isOption = true;
+
+					while (isOption) {
+						if ('option' + indexOptions in data) {
+							let keyOption = 'option' + indexOptions;
+							options[indexOptions] = data[keyOption];
+							indexOptions = indexOptions + 1;
+						} else {
+							isOption = false;
+						}
+					}
+					console.log(options)
+				}
+				 else if (data.pollType === 'random') {
 					type = 'free';
 				} else if (data.pollType === 'yesNo') {
 					type = 'yesNo';
@@ -57,7 +74,7 @@ export const actions: Actions = {
 
 				const question = await locals.pb.collection('question').create(sendData);
 
-				if (data.pollType === 'multiple') {
+				if ((data.pollType === 'multiple') || (data.pollType === 'select')) {
 					try {
 						for (let i = 0; i < options.length; i++) {
 							const optionData = {

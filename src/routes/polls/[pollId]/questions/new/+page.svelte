@@ -51,7 +51,7 @@
 			<h3 class="font-medium text-2xl w-fit ml-auto mr-auto">Abstimmungsart auswählen</h3>
 			<p class="w-fit ml-auto mr-auto">Welche Art von Abstimmung soll es werden?</p>
 			<div class="ml-auto mr-auto w-fit mt-5">
-				<select class="select select-primary w-full ml-auto mr-auto" bind:value={pollType} on:change={() => console.log(pollType)}>
+				<select class="select select-primary w-full ml-auto mr-auto" bind:value={pollType}>
 					<option disabled selected value="">Abstimmungstyp (Multiple Choice, Ja/ Nein, ...)</option>
 					<option value="multiple">Multiple Choice</option>
 					<option value="select">Select</option>
